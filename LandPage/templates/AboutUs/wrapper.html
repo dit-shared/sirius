@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+         <meta charset="utf-8">
+        <title>Главная</title>
+
+        {% load staticfiles %}
+        <link rel="stylesheet" href="{% static 'css/bootstrap4-growth.min.css' %}">
+    </head>
+    <body>
+        {% block header %} {% include "AboutUs/includes/header.html" %} {% endblock %}
+        {% block content %} {% include "AboutUs/includes/content.html" %} {% endblock %}
+        {% block footer %} {% include "AboutUs/includes/footer.html" %} {% endblock %}
+
+    <!-- JS -->
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+            crossorigin="anonymous"></script>
+    </body>
+</html>
