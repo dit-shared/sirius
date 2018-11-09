@@ -41,6 +41,8 @@ EMAIL_USE_TLS = True
 
 INSTALLED_APPS = [
     'LandPage',
+    'MailAgent',
+    'TelegramBot',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
