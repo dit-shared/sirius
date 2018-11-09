@@ -12,8 +12,8 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 
-HOSTNAME = 'localhost:8000'
-SERVER_IP = '127.0.0.1'
+HOSTNAME = '212.47.227.134:8000'
+SERVER_IP = '212.47.227.134'
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -28,7 +28,7 @@ SECRET_KEY = '##q!fj^cn(0^&&w#f-p-xm$tieppkkp4=g^rqs@77l_ts^5ywk'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '212.47.227.124']
+ALLOWED_HOSTS = ['*']
 
 # EMAIL settings
 EMAIL_HOST = 'smtp.gmail.com'
