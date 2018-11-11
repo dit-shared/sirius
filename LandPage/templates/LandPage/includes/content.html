@@ -1,7 +1,7 @@
 {% block content %}
 {% load staticfiles %}
 
-<div class="jumbotron">
+<div class="jumbotron jumbotron-carousel-landpage">
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
         <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
@@ -9,10 +9,10 @@
       </ol>
       <div class="carousel-inner" role="listbox">
         <div class="carousel-item active">
-          <img class="d-block w-100" src= "{% static '/img/car1.jpeg' %}" data-src="holder.js/900x400?theme=social" alt="900x400" data-holder-rendered="true" style="width: 900px; height: 400px;">
+          <img class="d-block w-100" src= "{% static '/img/car1.jpeg' %}" data-holder-rendered="true">
         </div>
         <div class="carousel-item">
-          <img class="d-block w-100" src= "{% static '/img/car2.jpeg' %}" data-src="holder.js/900x400?theme=industrial" alt="900x400" data-holder-rendered="true" style="width: 900px; height: 400px;">
+          <img class="d-block w-100" src= "{% static '/img/car2.jpeg' %}" data-holder-rendered="true">
         </div>
       </div>
       <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">

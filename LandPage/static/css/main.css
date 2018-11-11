@@ -1,0 +1,23 @@
+/* Desktop */
+@media (min-width: 770px) {
+    #authCard {
+        width: 450px
+    }
+    .desktopPadding {
+        padding: 3rem!important;
+    }
+    .formdiv {
+        width: 40%;
+    }
+}
+
+/* Mobile */
+@media (max-width: 769px) {
+    #authCard {
+        padding: 0!important;
+    }
+    .formdiv {
+        width: 90%;
+        padding: 3%;
+    }
+}
