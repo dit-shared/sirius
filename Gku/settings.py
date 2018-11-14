@@ -12,7 +12,13 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 
-HOSTNAME = '212.47.227.134:8000'
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True
+
+HOSTNAME = '127.0.0.1:8000'
+if not DEBUG:
+    HOSTNAME == '212.47.134.12:8000'
+
 SERVER_IP = '212.47.227.134'
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -25,9 +31,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '##q!fj^cn(0^&&w#f-p-xm$tieppkkp4=g^rqs@77l_ts^5ywk'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
 ALLOWED_HOSTS = ['*']
 
 # EMAIL settings
@@ -38,9 +41,14 @@ EMAIL_USE_TLS = True
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST_PASSWORD = 'HackersChoose1syn'
 
+
+RECAPTCHA_PRIVATE_KEY = '6LegpHoUAAAAAKZkDl-QmJQ9wAVAeVvKtdPGCgDz'
+RECAPTCHA_PUBLIC_KEY = '6LegpHoUAAAAACQoehcT3E57XpBbBi3XnFnqAIUl'
+
 # Application definition
 
 INSTALLED_APPS = [
+    'snowpenguin.django.recaptcha2',
     'LandPage',
     'TelegramBot',
     'django.contrib.admin',
@@ -140,3 +148,9 @@ MEDIA_URL = '/media/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+
+AES_DEFAULT_KEY = 'K3kL01ArB1D0L228K3kL01ArB1D0L228'
+AES_ACTIVATION_KEY = 'qwertyL0xqwertyL0xqwertyL0xqwert'
+AES_ID_KEY = 'importantEducaT10NimportantEduca'
+AES_DEFAULT_IV = b'\x83\xc5\x13\xfev\xeb<\x80@\xb1\xc4`\x89\x10\x01\xa7'

@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models import DefaultUser, News
 
-# Register your models here.
+admin.site.register(DefaultUser)
+admin.site.register(News)

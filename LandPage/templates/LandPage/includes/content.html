@@ -37,4 +37,10 @@
 </div>
 </div>
 
+<h1>Новасти</h1>
+
+{% for n in news %}
+<a href = "/news?id={{ n.id }}"><h2>{{n.title}}</h2></a>
+{% endfor %}
+
 {% endblock %}
