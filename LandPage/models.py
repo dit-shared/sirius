@@ -5,6 +5,23 @@ import hashlib, re, random, string
 from datetime import datetime
 import os
 
+def StandartEncryptField(field, aesKey):
+    aes = crypto.AESCipher(aesKey)
+    return str(aes.encrypt(field, iv=settings.AES_DEFAULT_IV, random=False), 'utf-8')
+
+def StandartDecryptField(field, aesKey):
+    aes = crypto.AESCipher(aesKey)
+    return aes.decrypt(field)
+
+def HashPassword(pwd):
+    sha256 = hashlib.sha256()
+    md5 = hashlib.md5()
+
+    sha256.update(pwd.encode('utf-8'))
+    md5.update(pwd.encode('utf-8'))
+
+    return md5.hexdigest()
+
 class DefaultUser(models.Model):
     name = models.CharField(max_length=128, default="")
     surname = models.CharField(max_length=128, default="")
@@ -30,13 +47,7 @@ class DefaultUser(models.Model):
         self.creationDate = datetime.now()
 
     def hashPass(self):
-        sha256 = hashlib.sha256()
-        md5 = hashlib.md5()
-
-        sha256.update(self.password.encode('utf-8'))
-        md5.update(self.password.encode('utf-8'))
-
-        self.password = md5.hexdigest()
+        self.password = HashPassword(self.password)
 
     def encrypt(self):
         aes = crypto.AESCipher(settings.AES_DEFAULT_KEY)

@@ -4,7 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.core.mail import send_mail
 from django.conf import settings
 from . import forms
-from .models import DefaultUser, News
+from .models import DefaultUser, News, StandartDecryptField, StandartEncryptField, HashPassword
 from Gku.crypto import AESCipher
 import datetime, urllib.parse, os
 """  
@@ -21,24 +21,34 @@ send_mail(
 
 def index(request):
     if 'id' not in request.session:
-        news = News.objects.all()
+        news = News.objects.all().order_by('-id')[:6]
         return render(request, 'LandPage/wrapper.html', {'news': news})
-    id = request.session['id']
-    user = DefaultUser.objects.get(id=id)
-    if user.activationType != 0:
-        return HttpResponseRedirect('/confirmation')
     return HttpResponseRedirect('/account')
 
 def login(request):
+    err = ''
     if 'id' in request.session:
-        return HttpResponseRedirect('/index')
+        return HttpResponseRedirect('/account')
     if request.method == 'POST':
         form = forms.Login(request.POST)
-        #if forms.is_valid():
-        login = request.POST['login']
-        password = request.POST['password']
-        return HttpResponse(login + password)
-    return render(request, 'Login/wrapper.html')
+        if form.is_valid():
+            login = StandartEncryptField(request.POST['login'], settings.AES_DEFAULT_KEY)
+            password = HashPassword(request.POST['password'])
+
+            if DefaultUser.objects.filter(login=login).exists():
+                user = DefaultUser.objects.get(login=login)
+                if password != StandartDecryptField(user.password, settings.AES_DEFAULT_KEY):
+                    err = 'Неправильный логин или пароль'
+                else:
+                    if user.activationType == 1:
+                        return HttpResponseRedirect('/confirmation')
+                    request.session['id'] = user.id
+                    return HttpResponseRedirect('/account')
+            else:
+                err = 'Такого пользователя не существует'
+    else:
+        form = forms.Login()
+    return render(request, 'Login/wrapper.html', {'form': form, 'ok': err == '', 'err': err})
 
 def register(request):
     if 'id' in request.session:
@@ -56,6 +66,7 @@ def register(request):
                 err = "Мыло не подходит по регулярке"
             else:
                 mail = user.mail
+                user.hashPass()
                 user.encrypt()
                 if not DefaultUser.chkExistLogin(user.login):
                     err = "Такой логин уже существует"
@@ -112,16 +123,17 @@ def activateAccount(request):
 
     if user.activationKey == key:
         DefaultUser.objects.filter(id=id).update(activationType=0)
-        request.session['id'] = user.id
-        return HttpResponseRedirect('/')
+        return HttpResponseRedirect('/login')
     return render(request, 'Confirm/error.html', {'error_msg': 'Неверный ключ'})
 
 def news(request):
     if 'id' not in request.GET:
         return HttpResponse('Error')
     newsID = request.GET['id']
-    news = News.objects.get(id=newsID)
-    return HttpResponse(news.title + ' ' + news.detailedNews)
+    if News.objects.filter(id=newsID).exists():
+        news = News.objects.get(id=newsID)
+        return render(request, 'News/index.html', {'news': news})
+    return render(request, '404/error_404.html')
 
 def confirmation(request):
     return render(request, 'Confirm/info.html')

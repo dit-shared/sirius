@@ -9,6 +9,7 @@ class CreateUser(forms.ModelForm):
         model = DefaultUser
         fields = ('mail', 'login', 'password')
 
-class Login():
+class Login(forms.ModelForm):
     class Meta:
+        model = DefaultUser
         fields = ('login', 'password')
