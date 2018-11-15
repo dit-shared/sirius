@@ -1,0 +1,41 @@
+{% load staticfiles %}
+
+{% block news %}
+<div id="blog">
+	<!-- Blog Grid START -->
+	<div class="section-block-grey" style="margin-top:0px">
+		<div class="container">
+			<div class="section-heading center-holder">
+				<h2>Последние Новости</h2>
+			</div>
+			<div class="row">
+				{% for n in news %}
+				<div class="col-md-4 col-sm-4 col-xs-12 wow fadeIn" data-wow-delay=".5s">
+					<div class="blog-grid">
+						<div class="blog-grid-img">
+							<img src="{{n.image.url}}" alt="blog-img">
+						</div>
+
+						<div class="blog-grid-content inner-padd">
+							<h4><a href="#">{{n.title}}</a></h4>
+							<div class="admin-info">
+								<i class="icon-users"></i><span>Admin</span>
+							</div>
+							<div class="admin-info">
+								<i class="icon-calendar-6"></i><span>{{n.creationDate}}</span>
+							</div>
+							<p>{{n.shortNews}}</p>
+							<div class="blog-grid-button">
+								<a href="/news?id={{n.id}}">Подробнее</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+	<!-- Blog Grid END -->
+</div>
+
+{% endblock %}

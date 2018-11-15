@@ -1,0 +1,68 @@
+{% load staticfiles %}
+{% block about %}
+<div id="about">
+<!-- About section START -->
+	<div class="section-block">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3 col-sm-12 col-xs-12 wow fadeIn" data-wow-delay=".4s">
+						<h2>Мы создаём сервисы будущего</h2>
+						<p style="font-size: 20px"> Простота, функциональность, надёжность - это не просто слова. Это основа всей деятельности нашей
+						   команды. Мы делаем веб-приложения, позволяющие упростить жизнь людям, избавляя их от рутинной работы.
+						   Используя наши сервисы, Вы можете быть уверены, что они будут доступны в любой момент.
+						</p>
+				</div>
+				<div class="col-md-4 col-sm-6 col-xs-12 col-md-offset-1 wow fadeInUpSm" data-wow-delay=".1s">
+					<img src="{% static 'LandPage/img/logos/tablet.png' %}" class="border-round img-shadow" alt="about-img">
+				</div>
+				<div class="col-md-3 col-sm-6 col-xs-12 col-md-offset-1 wow fadeIn" data-wow-delay=".4s">
+						<p style="font-size: 20px"> Все наши сервисы имеют множество функций, а разобраться с ними может любой. Если же у Вас
+							возникнут сложности, мы всегда готовы ответить на вопросы и выслушать предложения по
+							улучшению наших приложений. Зарегистрируйтесь прямо сейчас и получите доступ к самой современной системе сбора данных приборов учёта воды!
+						</p>
+						<a href="#" class="button-primary mt-30">Регистрация / <br> Личный кабинет</a>
+					</div>
+			</div>
+		</div>
+	</div>
+	<!-- About section END -->
+
+
+
+	<!-- CountUp Section START -->
+	<div class="section-block-parallax" style="background-image: url({% static 'LandPage/img/logos/net.jpg' %});">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3 col-sm-6 col-xs-12 wow fadeInDownSm" data-wow-delay=".1s">
+					<div class="countup-box">
+						<h4><font color="black">10000</font></h4>
+						<h5><font color="black">Строчек кода</font></h5>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 wow fadeInDownSm" data-wow-delay=".3s">
+					<div class="countup-box">
+						<h4><font color="black">100</font></h4>
+						<h5><font color="black">Часов работы <br> над проектом</font></h5>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 wow fadeInDownSm" data-wow-delay=".5s">
+					<div class="countup-box">
+						<h4><font color="black">8</font></h4>
+						<h5><font color="black">Человек работали <br> для Вас</font></h5>
+					</div>
+				</div>
+
+				<div class="col-md-3 col-sm-6 col-xs-12 wow fadeInDownSm" data-wow-delay=".7s">
+					<div class="countup-box">
+						<h4><font color="black">2</font></h4>
+						<h5><font color="black">Модели машинного <br> обучения</font></h5>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- CountUp Section END -->
+</div>
+{% endblock %}

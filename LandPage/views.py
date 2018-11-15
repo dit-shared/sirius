@@ -6,8 +6,7 @@ from django.conf import settings
 from . import forms
 from .models import DefaultUser, News
 from Gku.crypto import AESCipher
-import datetime, urllib.parse
-
+import datetime, urllib.parse, os
 """  
 from LandPage.mail import sendMail
 
@@ -139,4 +138,5 @@ def error_404(request, exception):
     return render(request, '404/error_404.html')
 
 def test(request):
+    str = os.path.join(settings.BASE_DIR, 'static/')
     return HttpResponse("OK")

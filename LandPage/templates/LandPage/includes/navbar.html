@@ -1,0 +1,32 @@
+{% load staticfiles %}
+{% block navbar %}
+<!-- Navbar START -->
+<header>
+	<nav class="navbar navbar-default navbar-custom" data-spy="affix" data-offset-top="50">
+	  <div class="container">
+	  	<div class="row">
+		    <div class="navbar-header navbar-header-custom">
+		      <button type="button" class="navbar-toggle collapsed menu-icon" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		        <span class="icon-bar"></span>
+		      </button>
+		      <a class="navbar-logo" href="index.html"><img src="{% static 'LandPage/img/logos/jku.png' %}" alt="logo"></a>
+		    </div>
+
+		    <!-- Collect the nav links, forms, and other content for toggling -->
+		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		      <ul class="nav navbar-nav navbar-right navbar-links-custom">
+		        <li><a href="#overview">Особенности</a></li>
+				<li><a href="#about">О нас</a></li>
+				<li><a href="#team">Команда</a></li>
+				<li><a href="#otz">Отзывы</a></li>
+				<li><a href="#blog">Новости</a></li>
+		      </ul>
+		    </div>
+	  	</div>
+	  </div>
+	</nav>
+</header>
+<!-- Navbar END -->
+{% endblock %}

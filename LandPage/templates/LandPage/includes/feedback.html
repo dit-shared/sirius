@@ -1,0 +1,60 @@
+{% load staticfiles %}
+
+{% block feedback %}
+<div id="otz">
+	<div class="section-block-parallax" style="background-image: url({% static 'LandPage/img/logos/background_blue.png' %});">
+		<div class="container">
+			<div class="section-heading white-color center-holder">
+				<h2> Отзывы пользователей</h2>
+				<p>Ждём Ваши отзывы и предложения на почту <br> Jkumoscow@gmail.com</p>
+			</div>
+			<div class="owl-carousel owl-theme" id="testmonials">
+				<div class="testmonial-block clearfix">
+					<div class="testmonial-img">
+						<img src="{% static 'LandPage/img/logos/cook.jpg' %}" alt="testmonial-img">
+					</div>
+					<div class="testmonial-text">
+						<div class="ml-15">
+							<span><font color="black">Шеф-повар ресторана</span>
+							<strong>Артём Тетерин</font></strong>
+							<p>Спасибо, очень удобный сервис! Мы с женой начали пользоваться совсем
+							недавно, но уже ощутили, насколько стало удобнее планировать бюджет. Что особенно
+							радует, система может сама отправлять данные со счётчиков, и мы не тратим на это много времени, как раньше.
+							</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="testmonial-block clearfix">
+					<div class="testmonial-img">
+						<img src="{% static 'LandPage/img/logos/designer.jpg' %}" alt="testmonial-img">
+					</div>
+					<div class="testmonial-text">
+						<div class="ml-15">
+							<span><font color="black">Дизайнер</span>
+							<strong>Елена Ткаченко</strong>
+							<p>Сервис очень простой и удобный. И дизайн отличный.</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="testmonial-block clearfix">
+					<div class="testmonial-img">
+						<img src="{% static 'LandPage/img/logos/programmer.png' %}" alt="testmonial-img">
+					</div>
+					<div class="testmonial-text">
+						<div class="ml-15">
+							<span><font color="black">Программист</span>
+							<strong>Иван Алексеенко</strong>
+							<p>Благодаря этому веб-приложению я могу не отвлекаться от разработки
+							из-за необходимости передавать показания счётчиков - система сама
+							предсказывает расход воды, который оказывается весьма близок к реальности, и передает его. Ставлю сервису 5 из 5.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Testmonials END -->
+</div>
+{% endblock %}

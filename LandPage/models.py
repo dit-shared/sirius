@@ -3,6 +3,7 @@ from Gku import crypto
 from django.conf import settings
 import hashlib, re, random, string
 from datetime import datetime
+import os
 
 class DefaultUser(models.Model):
     name = models.CharField(max_length=128, default="")
@@ -10,7 +11,7 @@ class DefaultUser(models.Model):
     patronymic = models.CharField(max_length=128, default="")
     login = models.CharField(max_length=128)
     password = models.CharField(max_length=128)
-    mail = models.CharField(max_length=128)
+    mail = models.EmailField(max_length=128, blank=True)
     activationKey = models.CharField(max_length=128)
     activationType = models.IntegerField(default=0)
     activationDate = models.DateTimeField(max_length=64, default=None)
@@ -122,6 +123,13 @@ class News(models.Model):
     shortNews = models.CharField(max_length=128)
     detailedNews = models.CharField(max_length=128)
     creationDate = models.DateTimeField(auto_now=True, max_length=64)
+    image = models.ImageField()
+
+    def save(self, *args, **kwargs):
+        parts = self.image.name.split('.')
+        file_extension = parts[len(parts) - 1]
+        self.image.name = 'News_' + self.title + str(random.randint(0, 9999)) + '.' + file_extension
+        super(News, self).save(*args, **kwargs)
 
     def __str__(self):
         return 'News(' + self.title + ' date: ' + str(self.creationDate) + ')'
