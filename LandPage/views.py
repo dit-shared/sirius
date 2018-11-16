@@ -7,17 +7,6 @@ from . import forms
 from .models import DefaultUser, News, StandartDecryptField, StandartEncryptField, HashPassword
 from Gku.crypto import AESCipher
 import datetime, urllib.parse, os
-"""  
-from LandPage.mail import sendMail
-
-send_mail(
-    'Subject here',
-    'Here is the message.',
-    'from@example.com',
-    ['to@example.com'],
-    fail_silently=False,
-)
-"""
 
 def index(request):
     if 'id' not in request.session:
@@ -26,7 +15,7 @@ def index(request):
     return HttpResponseRedirect('/account')
 
 def login(request):
-    err = ''
+    errors = list()
     if 'id' in request.session:
         return HttpResponseRedirect('/account')
     if request.method == 'POST':
@@ -38,40 +27,43 @@ def login(request):
             if DefaultUser.objects.filter(login=login).exists():
                 user = DefaultUser.objects.get(login=login)
                 if password != StandartDecryptField(user.password, settings.AES_DEFAULT_KEY):
-                    err = 'Неправильный логин или пароль'
+                    errors.append('Неправильный логин или пароль')
                 else:
                     if user.activationType == 1:
                         return HttpResponseRedirect('/confirmation')
                     request.session['id'] = user.id
                     return HttpResponseRedirect('/account')
             else:
-                err = 'Такого пользователя не существует'
+                errors.append('Такого пользователя не существует')
     else:
         form = forms.Login()
-    return render(request, 'Login/wrapper.html', {'form': form, 'ok': err == '', 'err': err})
+    forgotForm = forms.ForgotPass()
+    return render(request, 'Login/wrapper.html', {'form': form, 'forgotForm': forgotForm, 'ok': len(errors) == 0, 'errors': errors})
 
 def register(request):
     if 'id' in request.session:
         return HttpResponseRedirect('/index')
-    err = ""
+    errors = list()
     if request.method == 'POST':
         form = forms.CreateUser(request.POST)
         if form.is_valid():
             user = form.save(commit=False)
             if not user.chkLoginReg():
-                err = "Логин не подходит по регулярке"
+                errors.append("Логин не подходит по регулярке")
             elif not user.chkPass():
-                err = "Пароль не подходит по регулярке"
+                errors.append("Пароль не подходит по регулярке")
             elif not user.chkMail():
-                err = "Мыло не подходит по регулярке"
+                errors.append("Мыло не подходит по регулярке")
+            elif user.password != request.POST['repass']:
+                errors.append("Пароли не совпадают!")
             else:
                 mail = user.mail
                 user.hashPass()
                 user.encrypt()
                 if not DefaultUser.chkExistLogin(user.login):
-                    err = "Такой логин уже существует"
+                    errors.append("Такой логин уже существует")
                 elif not DefaultUser.chkExistMail(user.mail):
-                    err = "Аккаунт с такой почтой уже зарегистрирован!"
+                    errors.append("Аккаунт с такой почтой уже зарегистрирован!")
                 else:
                     user.genActivationKey(1)
                     key = urllib.parse.quote(user.encActivationKey())
@@ -90,7 +82,7 @@ def register(request):
                     return HttpResponseRedirect('/confirmation')
     else:
         form = forms.CreateUser()
-    return render(request, 'Register/wrapper.html', {'form': form, 'ok': err == "", 'err': err})
+    return render(request, 'Register/wrapper.html', {'form': form, 'ok': len(errors) == 0, 'errors': errors})
 
 
 def activateAccount(request):
@@ -125,6 +117,13 @@ def activateAccount(request):
         DefaultUser.objects.filter(id=id).update(activationType=0)
         return HttpResponseRedirect('/login')
     return render(request, 'Confirm/error.html', {'error_msg': 'Неверный ключ'})
+
+def forgotPassword(request):
+    if 'id' in request.session:
+        return HttpResponseRedirect('/account')
+    if 'mail' not in request.POST:
+        return HttpResponse('Error')
+    requisites = request.POST['mail']
 
 def news(request):
     if 'id' not in request.GET:

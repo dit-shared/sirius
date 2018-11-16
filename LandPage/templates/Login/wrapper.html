@@ -1,32 +1,113 @@
+
+<!------ Include the above in your HEAD tag ---------->
+
 <!DOCTYPE html>
 
-<html>
+{% load recaptcha2 %}
+<html lang="en">
     <head>
-         <meta charset="utf-8">
-        <title>Авторизация</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta http-equiv="content-type" content="text/html; charset= UTF-8">
 
         {% load staticfiles %}
-        <link rel="stylesheet" href="{% static 'css/bootstrap4-growth.css' %}">
-        <link rel="stylesheet" href="{% static 'LandPage/landpage.css' %}">
-        <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400" rel="stylesheet">
-        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="{% static 'css/main.css' %}">
+		<!-- Website CSS style -->
+		<link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+		<!-- Website Font style -->
+	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+		<!-- Google Fonts -->
+		<link href='https://fonts.googleapis.com/css?family=Passion+One' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Oxygen' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="{% static 'Register/reg.css' %}" type="text/css"/>
+
+        {% recaptcha_init %}
+		<title>Авторизация</title>
     </head>
     <body>
-        {% block header %} {% include "Login/includes/header.html" %} {% endblock %}
-        {% block content %} {% include "Login/includes/content.html" %} {% endblock %}
-        {% block footer %} {% include "Login/includes/footer.html" %} {% endblock %}
+		<div class="container">
+			<div class="row main">
+				<div class="main-login main-center">
+				<h1 align="center"> Авторизация </h1>
+					<form class="" method="post" action="#">
+                    {% csrf_token %}
 
-    <!-- JS -->
-         <!-- JavaScript for Bootstrap -->
-    <script src="http://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
-        crossorigin="anonymous"></script>
+                    {% for field in form %}
+						<div class="form-group">
+                            {{ field.label_tag }}
+							<div class="cols-sm-10">
+								<div class="input-group">
+                                    <span></span>
+                                    {{ field }}
+                                    {% if field.help_text %}
+                                        <p class="help">{{ field.help_text|safe }}</p>
+                                    {% endif %}
+								</div>
+							</div>
+						</div>
+                    {% endfor %}
+                        {% for error in errors %}
+                            <div class="alert alert-danger">
+                                <strong>{{ error }}</strong>
+                            </div>
+                        {% endfor %}
+                        {% for error in form.errors %}
+                            <div class="alert alert-danger">
+                                <strong>{{ error }}</strong>
+                            </div>
+                        {% endfor %}
+                        <center>
+                            <button class="button" style="vertical-align:middle" type="submit"><span>Отправить </span></button><br/>
+                            <a href="/" style="color:black;">На главную</a>
+                            <a href="" style="margin:6%;" data-toggle="modal" data-target="#forgotPasswordModal"> Забыли пароль?</a>
+                            <a href="/register">Регистрация</a>
+                        </center>
+					</form>
+				</div>
+			</div>
+		</div>
 
+
+        <!-- Modal -->
+    <div class="modal fade" id="forgotPasswordModal" tabindex="-1" role="dialog" aria-labelledby="forgotPasswordModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form action="/forgotPassword" method="POST">
+                    {% csrf_token %}
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="forgotPasswordModalLabel">Забыли пароль?</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body">
+                        <label class="blockquote">Логин / Почта</label>
+                        {% for field in forgotForm %}
+                                {{ field }}
+                                {% if field.help_text %}
+                                    <p class="help">{{ field.help_text|safe }}</p>
+                                {% endif %}
+                        {% endfor %}
+
+                        <small id="emailHelp" class="form-text text-muted">На Вашу почту будет отправлено письмо</small>
+                        <!-- This will be filled using JS -->
+                        <div id="alertWrapperFP" class="mt-3"></div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" id="FPClose" data-dismiss="modal">Закрыть</button>
+                        <button type="submit" class="btn btn-primary">Отправить</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+		 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
     <!-- SweetAlert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.26.11/dist/sweetalert2.all.min.js"></script>
-    </body>
+	</body>
 </html>

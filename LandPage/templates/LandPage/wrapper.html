@@ -34,6 +34,15 @@
 	<!-- Fonts Google -->
 	<link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,600,700,800,900&amp;subset=latin-ext,vietnamese" rel="stylesheet">
 
+	<style>
+		.flex {
+			display: flex;
+		}
+
+		.item {
+			margin-right: 12px;
+		}
+	</style>
 </head>
 <body>
 
@@ -67,38 +76,7 @@
 {% block feedback %} {% include "LandPage/includes/feedback.html" %} {% endblock %}
 {% block news %} {% include "LandPage/includes/news.html" %} {% endblock %}
 
-<!-- Partners Section START -->
-<div class="partner-section-grey">
-	<div class="container">	
-        <div class="owl-carousel owl-theme partners wow fadeInLeft" id="our-partners">
-            <div class="item">
-            	<img src="http://via.placeholder.com/216x108" alt="partner-image">      
-            </div>	
-
-            <div class="item">
-            	<img src="http://via.placeholder.com/216x108" alt="partner-image">      
-            </div>
-
-            <div class="item">
-            	<img src="http://via.placeholder.com/216x108" alt="partner-image">      
-            </div>
-
-            <div class="item">
-            	<img src="http://via.placeholder.com/216x108" alt="partner-image">      
-            </div>
-
-            <div class="item">
-            	<img src="http://via.placeholder.com/216x108" alt="partner-image">      
-            </div>
-
-            <div class="item">
-            	<img src="http://via.placeholder.com/216x108" alt="partner-image">      
-            </div>	        		            			            			                      
-        </div>  		     	
-	</div>
-</div>
-<!-- Partners Section END -->
-
+{% block partners %} {% include 'LandPage/includes/partners.html' %} {% endblock %}
 {% block footer %} {% include 'LandPage/includes/footer.html' %} {% endblock %}
 
 

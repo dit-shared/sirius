@@ -1,0 +1,27 @@
+{% load staticfiles %}
+
+{% block partners %}
+<!-- Partners Section START -->
+<div class="partner-section-grey">
+	<div class="container">
+        <div class="owl-carousel owl-theme partners wow fadeInLeft" id="our-partners">
+            <div class="item" style="width:90%;">
+            	<img src="{% static 'LandPage/img/logos/dit.jpg' %}" alt="partner-image" style="width:130%; margin-top: 19%;">
+            </div>
+            <div class="item">
+            	<img src="{% static 'LandPage/img/logos/sirius.jpg' %}" alt="partner-image" style="width:110%; margin-top:15%;">
+            </div>
+            <div class="item">
+            	<img src="{% static 'LandPage/img/logos/JetBrains.png' %}" alt="partner-image" style="width:110%; margin-top:5%;">
+            </div>
+            <div class="item">
+            	<img src="{% static 'LandPage/img/logos/mosent.png' %}" alt="partner-image" style="width:200%; margin-top:10%;">
+            </div>
+            <div class="item">
+            	<img src="{% static 'LandPage/img/logos/jkhmos.png' %}" alt="partner-image" style="width:110%; margin-top:20%;">
+            </div>
+        </div>
+	</div>
+</div>
+<!-- Partners Section END -->
+{% endblock %}
