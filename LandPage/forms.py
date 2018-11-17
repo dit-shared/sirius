@@ -4,10 +4,10 @@ from snowpenguin.django.recaptcha2.fields import ReCaptchaField
 from snowpenguin.django.recaptcha2.widgets import ReCaptchaWidget
 
 class CreateUser(forms.ModelForm):
-    captcha = ReCaptchaField(widget=ReCaptchaWidget())
-    password = forms.CharField(widget=forms.PasswordInput())
-    repass = forms.CharField(widget=forms.PasswordInput())
-    mail = forms.EmailField(widget=forms.EmailInput())
+    captcha = ReCaptchaField(widget=ReCaptchaWidget(), label='Пройдите капчу')
+    password = forms.CharField(widget=forms.PasswordInput(), label='Введите пароль')
+    repass = forms.CharField(widget=forms.PasswordInput(), label='Повторите пароль')
+    mail = forms.EmailField(widget=forms.EmailInput(), label='Введите почту')
     class Meta:
         model = DefaultUser
         fields = ('mail', 'login', 'password', 'repass',)
@@ -21,7 +21,8 @@ class CreateUser(forms.ModelForm):
         self.fields['captcha'].widget.attrs.update({'style':'margin-left: 10%;'})
 
 class Login(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput())
+    password = forms.CharField(widget=forms.PasswordInput(), label='Пароль')
+    login = forms.CharField(label='Логин')
     class Meta:
         model = DefaultUser
         fields = ('login', 'password')
@@ -42,3 +43,16 @@ class ForgotPass(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(ForgotPass, self).__init__(*args, **kwargs)
         self.fields['mail'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Ваш логин или пароль', 'style': 'width: 100%; margin-bottom:2%;'})
+
+class RecoverForm(forms.ModelForm):
+    password = forms.CharField(widget=forms.PasswordInput, label='Введите пароль')
+    repass = forms.CharField(widget=forms.PasswordInput, label='Повторите пароль')
+
+    class Meta:
+        model = DefaultUser
+        fields = ('password',)
+
+    def __init__(self, *args, **kwargs):
+        super(RecoverForm, self).__init__(*args, **kwargs)
+        self.fields['password'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Введите новый пароль', })
+        self.fields['repass'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Повторите пароль', })

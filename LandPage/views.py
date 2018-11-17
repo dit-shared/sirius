@@ -10,7 +10,7 @@ import datetime, urllib.parse, os
 
 def index(request):
     if 'id' not in request.session:
-        news = News.objects.all().order_by('-id')[:6]
+        news = News.objects.all().order_by('-id')[:3]
         return render(request, 'LandPage/wrapper.html', {'news': news})
     return HttpResponseRedirect('/account')
 
@@ -26,13 +26,17 @@ def login(request):
 
             if DefaultUser.objects.filter(login=login).exists():
                 user = DefaultUser.objects.get(login=login)
-                if password != StandartDecryptField(user.password, settings.AES_DEFAULT_KEY):
+                try:
+                    decPass = StandartDecryptField(user.password, settings.AES_DEFAULT_KEY)
+                    if password != decPass:
+                        errors.append('Неправильный логин или пароль')
+                    else:
+                        if user.activationType == 1:
+                            return HttpResponseRedirect('/confirmation')
+                        request.session['id'] = user.id
+                        return HttpResponseRedirect('/account')
+                except:
                     errors.append('Неправильный логин или пароль')
-                else:
-                    if user.activationType == 1:
-                        return HttpResponseRedirect('/confirmation')
-                    request.session['id'] = user.id
-                    return HttpResponseRedirect('/account')
             else:
                 errors.append('Такого пользователя не существует')
     else:
@@ -99,7 +103,11 @@ def activateAccount(request):
     except:
         return render(request, 'Confirm/error.html', {'error_msg': 'Ууупс... Ошибка!'})
 
-    user = DefaultUser.objects.get(id=id)
+
+    if DefaultUser.objects.filter(id=id).exists():
+        user = DefaultUser.objects.get(id=id)
+    else:
+        return render(request, 'Confirm/error.html', {'error_msg': 'Ууупс... Ошибка!'})
 
     if user.activationType != 1:
         return HttpResponseRedirect('/')
@@ -123,7 +131,130 @@ def forgotPassword(request):
         return HttpResponseRedirect('/account')
     if 'mail' not in request.POST:
         return HttpResponse('Error')
-    requisites = request.POST['mail']
+    forgotForm = forms.ForgotPass(request.POST)
+    errors = list()
+    if forgotForm.is_valid():
+        requisites = StandartEncryptField(request.POST['mail'], settings.AES_DEFAULT_KEY)
+
+        if DefaultUser.objects.filter(mail=requisites).exists():
+            user = DefaultUser.objects.get(mail=requisites)
+        elif DefaultUser.objects.filter(login=requisites).exists():
+            user = DefaultUser.objects.get(login=requisites)
+        else:
+            errors.append('Такого пользователя не существует!')
+
+        if len(errors) == 0:
+            key = user.genActivationKey(2)
+            encID = urllib.parse.quote(user.getEncID())
+            user.save()
+
+            encKey = urllib.parse.quote(StandartEncryptField(key, settings.AES_ACTIVATION_KEY))
+            user.decrypt()
+
+            send_mail(
+                'Восстановление пароля',
+                'http://' + settings.HOSTNAME + '/accountRecover?id=' + encID + '&key=' + encKey,
+                'cypherdesk.isyn@gmail.com',
+                [user.mail, ],
+            )
+            return HttpResponseRedirect('/confirmation')
+    else:
+        forgotForm = forms.ForgotPass()
+        errors.append('Заполните капчу')
+
+    form = forms.Login()
+    return render(request, 'Login/wrapper.html', {'form': form, 'forgotForm': forgotForm, 'ok2': len(errors) == 0, 'forgotFormErrors': errors})
+
+def accountRecover(request):
+    if 'id' not in request.GET or 'key' not in request.GET:
+        return HttpResponseRedirect('/')
+    encID, encKey = request.GET['id'], request.GET['key']
+
+    aes = AESCipher(settings.AES_ID_KEY)
+
+    try:
+        id = aes.decrypt(urllib.parse.unquote(encID))
+    except UnicodeDecodeError:
+        return render(request, 'Confirm/error.html', {'error_msg': 'Неверный ключ'})
+    except:
+        return render(request, 'Confirm/error.html', {'error_msg': 'Ууупс... Ошибка!'})
+
+    if DefaultUser.objects.filter(id=id).exists():
+        user = DefaultUser.objects.get(id=id)
+    else:
+        return render(request, 'Confirm/error.html', {'error_msg': 'Ууупс... Ошибка!'})
+
+    if user.activationType != 2:
+        return HttpResponseRedirect('/')
+
+    aes = AESCipher(settings.AES_ACTIVATION_KEY)
+
+    try:
+        key = aes.decrypt(urllib.parse.unquote(encKey))
+    except UnicodeDecodeError:
+        return render(request, 'Confirm/error.html', {'error_msg': 'Неверный ключ'})
+    except:
+        return render(request, 'Confirm/error.html', {'error_msg': 'Ууупс... Ошибка!'})
+
+    if user.activationKey == key:
+        form = forms.RecoverForm()
+        request.session['enc_id'] = encID
+        request.session['key'] = encKey
+        return render(request, 'Register/recover.html', {'form': form})
+    return render(request, 'Confirm/error.html', {'error_msg': 'Ууупс... Ошибка!'})
+
+def changePass(request):
+    if 'enc_id' not in request.session or 'key' not in request.session:
+        return HttpResponseRedirect('/')
+    encID, encKey = request.session['enc_id'], request.session['key']
+
+    del request.session['enc_id']
+    del request.session['key']
+
+    aes = AESCipher(settings.AES_ID_KEY)
+    try:
+        id = aes.decrypt(urllib.parse.unquote(encID))
+    except UnicodeDecodeError:
+        return render(request, 'Confirm/error.html', {'error_msg': 'Неверный ключ'})
+    except:
+        return render(request, 'Confirm/error.html', {'error_msg': 'Ууупс... Ошибка!'})
+
+    if DefaultUser.objects.filter(id=id).exists():
+        user = DefaultUser.objects.get(id=id)
+    else:
+        return render(request, 'Confirm/error.html', {'error_msg': 'Ууупс... Ошибка!'})
+
+    if user.activationType != 2:
+        return HttpResponseRedirect('/')
+
+    aes = AESCipher(settings.AES_ACTIVATION_KEY)
+
+    try:
+        key = aes.decrypt(urllib.parse.unquote(encKey))
+    except UnicodeDecodeError:
+        return render(request, 'Confirm/error.html', {'error_msg': 'Неверный ключ'})
+    except:
+        return render(request, 'Confirm/error.html', {'error_msg': 'Ууупс... Ошибка!'})
+
+    if user.activationKey == key:
+        errors = list()
+        form = forms.RecoverForm(request.POST)
+        if form.is_valid():
+            if request.POST['password'] != request.POST['repass']:
+                errors.append('Пароли не совпадают!')
+            else:
+                user.activationKey = ""
+                user.activationType = 0
+                user.password = request.POST['password']
+                user.hashPass()
+                user.password = StandartEncryptField(user.password, settings.AES_DEFAULT_KEY)
+                user.save()
+                return HttpResponseRedirect('/login')
+        else:
+            form = forms.RecoverForm()
+        return render(request, 'Register/recover.html', {'form': form, 'errors': errors})
+    return render(request, 'Confirm/error.html', {'error_msg': 'Ууупс... Ошибка!'})
+
 
 def news(request):
     if 'id' not in request.GET:
@@ -149,5 +280,5 @@ def error_404(request, exception):
     return render(request, '404/error_404.html')
 
 def test(request):
-    str = os.path.join(settings.BASE_DIR, 'static/')
-    return HttpResponse("OK")
+    v = request.GET['v']
+    return HttpResponse(StandartEncryptField(v, settings.AES_DEFAULT_KEY))

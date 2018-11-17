@@ -7,6 +7,7 @@ import LandPage.views as LandPage_views
 
 urlpatterns = [
     path('', include('LandPage.urls')),
+    path('account/', include('Account.urls')),
     path('admin/', admin.site.urls),
 ]
 

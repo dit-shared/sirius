@@ -49,6 +49,7 @@ RECAPTCHA_PUBLIC_KEY = '6LegpHoUAAAAACQoehcT3E57XpBbBi3XnFnqAIUl'
 
 INSTALLED_APPS = [
     'snowpenguin.django.recaptcha2',
+    'Account',
     'LandPage',
     'TelegramBot',
     'django.contrib.admin',
