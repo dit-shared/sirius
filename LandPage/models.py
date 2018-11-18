@@ -132,7 +132,7 @@ class DefaultUser(models.Model):
 class News(models.Model):
     title = models.CharField(max_length=128)
     shortNews = models.CharField(max_length=128)
-    detailedNews = models.CharField(max_length=128)
+    detailedNews = models.CharField(max_length=8128)
     creationDate = models.DateTimeField(auto_now=True, max_length=64)
     image = models.ImageField()
 
