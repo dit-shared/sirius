@@ -63,7 +63,7 @@ TABLE OF CONTENT
 }	
 
 .section-block-grey{
-	padding: 100px 0px 100px 0px;
+	padding: 20px 0px 100px 0px;
 	background-color: #f9f9f9;
 	border-top: 1px solid #efefef;
 	border-bottom: 1px solid #efefef;
@@ -100,7 +100,7 @@ TABLE OF CONTENT
 2. Headings
 -------------------------------------------*/
 .section-heading{
-	margin-bottom: 70px;
+	margin-bottom: 2 %;
 }
 
 .section-heading h2{

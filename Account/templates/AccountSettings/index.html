@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mos.AI - электричество</title>
+    {% load staticfiles %}
+    {% block head %} {% include 'Account/head.html' %} {% endblock %}
+</head>
+<body class="fix-header fix-sidebar card-no-border">
+<!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper">
+        {% block topbar %} {% include 'Account/topbar.html' %} {% endblock %}
+        {% block sidebar %} {% include 'Account/sidebar.html' %} {% endblock %}
+           <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Bread crumb and right sidebar toggle -->
+            <!-- ============================================================== -->
+            <div class="row page-titles">
+                <div class="col-md-5 align-self-center">
+                    <h3 class="text-themecolor">Настройки</h3>
+                </div>
+                <div class="col-md-7 align-self-center">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="javascript:void(0)">Личный кабинет</a></li>
+                        <li class="breadcrumb-item active">Настройки</li>
+                    </ol>
+                </div>
+                <div>
+                    <button class="right-side-toggle waves-effect waves-light btn-inverse btn btn-circle btn-sm pull-right m-l-10"><i class="ti-settings text-white"></i></button>
+                </div>
+            </div>
+
+            <center>
+            <div class="col-lg-3 col-xlg-2 m-b-30">
+                <form>
+                    <h1>Сменить пароль</h1>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="exampleInputname1" placeholder="Старый пароль"></div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="exampleInputname1" placeholder="Новый пароль"></div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="exampleInputname1" placeholder="Подтвердите пароль"></div>
+                    <button type="Submit" class="btn btn-info">Сменить пароль</button>
+                </form>
+                <br>
+                <form>
+                <h1>Изменить Email</h1>
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="Введите Email"> </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="Подтвердите Email"> </div>
+                    <button type="Submit" class="btn btn-info">Изменить Email</button>
+                </form>
+            </div>
+            </center>
+            {% block rightSideBar %} {% include 'Account/rightSideBar.html' %} {% endblock %}
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+{% block scripts %} {% include 'Account/scripts.html' %} {% endblock %}
+</body>
+</html>

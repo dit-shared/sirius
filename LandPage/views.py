@@ -4,14 +4,14 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.core.mail import send_mail
 from django.conf import settings
 from . import forms
-from .models import DefaultUser, News, StandartDecryptField, StandartEncryptField, HashPassword
+from .models import DefaultUser, News, StandartDecryptField, StandartEncryptField, HashPassword, Subscriber
 from Gku.crypto import AESCipher
-import datetime, urllib.parse, os
+import datetime, urllib.parse, os, re
 
 def index(request):
     if 'id' not in request.session:
         news = News.objects.all().order_by('-id')[:3]
-        return render(request, 'LandPage/wrapper.html', {'news': news})
+        return render(request, 'LandPage/wrapper.html', {'news': news, 'showMsg': False})
     return HttpResponseRedirect('/account')
 
 def login(request):
@@ -279,6 +279,44 @@ def error_500(request):
 def error_404(request, exception):
     return render(request, '404/error_404.html')
 
+def subscribe(request):
+    if 'id' not in request.session:
+        news = News.objects.all().order_by('-id')[:3]
+        msgType, msg, msgTitle = 'success', 'Спасибо за подписку!', 'Отлично!'
+
+        if 'mail' not in request.POST:
+            return HttpResponseRedirect('/index')
+
+        mail = request.POST['mail']
+        if not chkMail(mail):
+            msgTitle = 'Ой, ошибочка...'
+            msg = 'Введите правильный почтовый адрес!'
+            msgType = 'error'
+
+        if Subscriber.objects.filter(mail=mail).exists():
+            msgType = 'info'
+            msg = 'Вы уже подписаны на рассылку!'
+            msgTitle = 'Спасибо!'
+        else:
+            s = Subscriber()
+            s.mail = mail
+            s.save()
+
+        return render(request, 'LandPage/wrapper.html', {'news': news, 'showMsg': True, 'msg': msg, 'msgType': msgType, 'msgTitle': msgTitle})
+    return HttpResponseRedirect('/account')
+
+def chkMail(mail):
+    if re.match(r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)", mail):
+        return True
+    return False
+
+
 def test(request):
-    v = request.GET['v']
-    return HttpResponse(StandartEncryptField(v, settings.AES_DEFAULT_KEY))
+    user = DefaultUser()
+    user.login = 'tmp_user'
+    user.password = 'loopa_poopa'
+    user.hashPass()
+    user.genActivationKey(2)
+    user.encrypt()
+    user.save()
+    return HttpResponse('OK')

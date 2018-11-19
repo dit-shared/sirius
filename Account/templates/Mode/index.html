@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mos.AI - выбор режима</title>
+    {% load staticfiles %}
+    {% block head %} {% include 'Account/head.html' %} {% endblock %}
+</head>
+<body class="fix-header fix-sidebar card-no-border">
+    <div class="preloader">
+        <svg class="circular" viewBox="25 25 50 50">
+            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" /> </svg>
+    </div>
+    <div id="main-wrapper">
+        {% block topbar %} {% include 'Account/topbar.html' %} {% endblock %}
+        {% block sidebar %} {% include 'Account/sidebar.html' %} {% endblock %}
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+
+            <!-- Default checked -->
+                <br>
+                <div class="col-lg-3 col-xlg-2 m-b-30">
+                    <div class="form-group">
+                        <label for="sel1">Выберите режим работы сервиса:</label>
+                        <select class="form-control" id="sel1">
+                            <option>Режим напоминания</option>
+                            <option>Режим автозаполнения</option>
+                            </select>
+                    </div>
+                    <button type="Submit" class="btn btn-info">ОК</button>
+                </div>
+
+            <div class="container-fluid">
+                <!-- Row -->
+                {% block rightSideBar %} {% include 'Account/rightSideBar.html' %} {% endblock %}
+                <!-- ============================================================== -->
+                <!-- End Right sidebar -->
+                <!-- ============================================================== -->
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+{% block scripts %} {% include 'Account/scripts.html' %} {% endblock %}
+</body>
+</html>

@@ -1,23 +1,29 @@
 {% load staticfiles %}
 {% block topbar %}
 <!-- Top-Bar START -->
-<div id="top-bar" class="hidden-xs">
+<div id="top-bar">
 	<div class="container">
-		<div class="row">
-			<div class="col-md-9 col-xs-12">
+		<div class="flex">
+			<div class="col-md-9 col-xs-12 hidden-xs">
 				<ul class="top-bar-info">
 					<li><i class="fa fa-envelope-o"></i>Обратная связь:  Jkumoscow@gmail.com</li>
 				</ul>
 			</div>
-			<div class="col-md-3 col-sm-3 col-xs-12 right-holder hidden-sm">
-				<div class="flex">
-					<div class = "item">
-						<a href="/login" class="top-appoinment">Войти</a>
-					</div>
-					<div class = "item">
-						<a href="/register" class="top-appoinment">Регистрация</a>
-					</div>
-				</div>
+
+			<div class="flex">
+					<!-- <div id="right">	 -->
+						<div class="row">
+							<div class="item">
+								<a href="/register" class="top-appoinment">Регистрация</a>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="item">
+								<a href="/login" class="top-appoinment">Авторизация</a>
+							</div>
+						</div>
+					<!-- </div> -->
 			</div>
 		</div>
 	</div>

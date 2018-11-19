@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
-	<title>Moscow.JKU</title>
+	<title>Mos.AI - инновационный сервис для города</title>
 	<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -37,17 +37,20 @@
 	<style>
 		.flex {
 			display: flex;
+			justify-content: flex-end;
 		}
-
 		.item {
-			margin-right: 12px;
+			margin-right: 40px;
+		}
+		#right {
+			float:right;
+		}
+		.swal2-container {
+ 			zoom: 1.5;
 		}
 	</style>
 </head>
 <body>
-
-
-
 
 <!-- Preloader Start-->
 <div id="preloader">
@@ -77,8 +80,9 @@
 {% block news %} {% include "LandPage/includes/news.html" %} {% endblock %}
 
 {% block partners %} {% include 'LandPage/includes/partners.html' %} {% endblock %}
-{% block footer %} {% include 'LandPage/includes/footer.html' %} {% endblock %}
+{% block tools %} {% include 'LandPage/includes/tools.html' %} {% endblock %}
 
+{% block footer %} {% include 'LandPage/includes/footer.html' %} {% endblock %}
 
 <!-- Jquery -->
 <script src="{% static 'js/jquery.min.js' %}"></script>
@@ -114,6 +118,18 @@
 
 <!-- Main JS -->
 <script src="{% static 'LandPage/js/main.js' %}"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.26.11/dist/sweetalert2.all.min.js"></script>
+
+{% if showMsg == True %}
+	<script>
+		swal (
+		  '{{ msgTitle }}',
+		  '{{ msg }}',
+		  '{{ msgType }}',
+		);
+	</script>
+{% endif %}
 
 </body>
 </html>

@@ -52,21 +52,21 @@ $(function() {
         lineColors: ['#FF8080', '#007bff',],
         resize: true,
         xLabelAngle: 45,
-        xLabels: 'day',
-        xLabelFormat: function (d) {
-            var weekdays = new Array(7);
-            weekdays[0] = "SUN";
-            weekdays[1] = "MON";
-            weekdays[2] = "TUE";
-            weekdays[3] = "WED";
-            weekdays[4] = "THU";
-            weekdays[5] = "FRI";
-            weekdays[6] = "SAT";
-
-            return weekdays[d.getDay()] + '-' + 
-                   ("0" + (d.getMonth() + 1)).slice(-2) + '-' + 
-                   ("0" + (d.getDate())).slice(-2);
-        },
+        xLabels: 'month',
+//        xLabelFormat: function (d) {
+//            var weekdays = new Array(7);
+//            weekdays[0] = "SUN";
+//            weekdays[1] = "MON";
+//            weekdays[2] = "TUE";
+//            weekdays[3] = "WED";
+//            weekdays[4] = "THU";
+//            weekdays[5] = "FRI";
+//            weekdays[6] = "SAT";
+//
+//            return weekdays[d.getDay()] + '-' +
+//                   ("0" + (d.getMonth() + 1)).slice(-2) + '-' +
+//                   ("0" + (d.getDate())).slice(-2);
+//        },
     });
 
     // ============================================================== 
@@ -88,7 +88,7 @@ $(function() {
 
         $('.spark-count2').sparkline([20, 40, 30], {
             type: 'pie',
-            height: '5',
+            height: '80',
             resize: true,
             sliceColors: ['#1cadbf', '#1f5f67', '#ffffff']
         });

@@ -14,4 +14,5 @@ urlpatterns = [
     path('forgotPassword', views.forgotPassword, name='forgotPassword'),
     path('accountRecover', views.accountRecover, name='accountRecover'),
     path('changePass', views.changePass, name='changePass'),
+    path('subscribe', views.subscribe, name='subscribe'),
 ]

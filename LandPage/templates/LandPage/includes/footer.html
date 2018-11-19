@@ -10,7 +10,7 @@
 				<div class="col-md-3 col-sm-12 col-xs-12">
 					<div class="footer-column-1">
 						<div class="white-color mt-20">
-								<h1>Mosсow.JKU</h1>
+								<h1>Mos.AI</h1>
 						</div>
 					</div>
 				</div>
@@ -39,12 +39,15 @@
 					<div class="footer-column-heading">
 						<h6>Подписка на новости</h6>
 					</div>
-				    <div class="input-group newsletter-form">
-				      <input type="email"  placeholder="Your Email">
-				      <span class="input-group-btn">
-				        <button class="btn btn-default" type="submit"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
-				      </span>
-				    </div>
+					<form method="POST" action="/subscribe">
+						{% csrf_token %}
+						<div class="input-group newsletter-form">
+						  <input type="email" name= "mail" placeholder="Your Email">
+						  <span class="input-group-btn">
+							<button class="btn btn-default" type="submit"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+						  </span>
+						</div>
+					</form>
 				</div>
 				<!-- Col 4 End -->
 			</div>
@@ -55,10 +58,9 @@
 			<div class="row">
 				<div class="col-md-6 col-sm-6 col-xs-12">
 					<div class="bottom-icons white-color">
-						<a href="#"><i class="fa fa-facebook"></i></a>
-						<a href="#"><i class="fa fa-twitter"></i></a>
-						<a href="#"><i class="fa fa-instagram"></i></a>
-						<a href="#"><i class="fa fa-pinterest"></i></a>
+						<a href="https://www.facebook.com/PGU.mos.ru/?hc_ref=ARRh1Hq8RPHKCYSa9.." target="_blank"><i class="fa fa-facebook"></i></a>
+						<a href="https://twitter.com/moscow" target="_blank"><i class="fa fa-twitter"></i></a>
+						<a href="https://www.instagram.com/mosru_official/" target="_blank"><i class="fa fa-instagram"></i></a>
 					</div>
 				</div>
 				<div class="col-md-6 col-sm-6 col-xs-12">

@@ -132,7 +132,7 @@ class DefaultUser(models.Model):
 class News(models.Model):
     title = models.CharField(max_length=128)
     shortNews = models.CharField(max_length=128)
-    detailedNews = models.CharField(max_length=128)
+    detailedNews = models.CharField(max_length=8128)
     creationDate = models.DateTimeField(auto_now=True, max_length=64)
     image = models.ImageField()
 
@@ -144,3 +144,10 @@ class News(models.Model):
 
     def __str__(self):
         return 'News(' + self.title + ' date: ' + str(self.creationDate) + ')'
+
+class Subscriber(models.Model):
+    mail = models.EmailField(blank=True, max_length=128)
+    date = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.mail

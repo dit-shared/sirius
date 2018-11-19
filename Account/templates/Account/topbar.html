@@ -1,0 +1,86 @@
+{% load staticfiles %}
+{% block topbar %}
+
+    <!-- ============================================================== -->
+    <!-- Topbar header - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <header class="topbar">
+        <nav class="navbar top-navbar navbar-expand-md navbar-light">
+            <!-- ============================================================== -->
+            <!-- Logo -->
+            <!-- ============================================================== -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/account">
+                    <b>
+                        <img src="{% static 'LandPage/img/logos/jku.png' %}" alt="homepage" class="light-logo" style="width:50%;"/>
+                    </b>
+                    <span>
+                     <!-- dark Logo text -->
+                     <img src="{% static 'LandPage/img/logos/jku.png' %}" alt="homepage" class="dark-logo" style="width:50%;" />
+                     <!-- Light Logo text -->
+                     <img src="{% static 'LandPage/img/logos/jku.png' %}" class="light-logo" alt="homepage" style="width:50%;" /></span> </a>
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Logo -->
+            <!-- ============================================================== -->
+            <div class="navbar-collapse">
+                <!-- ============================================================== -->
+                <!-- toggle and nav items -->
+                <!-- ============================================================== -->
+                <ul class="navbar-nav mr-auto mt-md-0">
+                    <!-- This is  -->
+                    <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="mdi mdi-menu"></i></a> </li>
+                    <li class="nav-item m-l-10"> <a class="nav-link sidebartoggler hidden-sm-down text-muted waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i></a> </li>
+                    <li class="nav-item dropdown mega-dropdown"> <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="mdi mdi-view-grid"></i></a>
+                        <div class="dropdown-menu animated slideInUp">
+                            <ul class="mega-dropdown-menu row">
+                                <li class="col-lg-3 col-xlg-2 m-b-30">
+                                    <h4 class="m-b-20">СВЯЗАТЬСЯ С НАМИ</h4>
+                                    <!-- Contact -->
+                                    <form>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="exampleInputname1" placeholder="Введите Ваше имя"> </div>
+                                        <div class="form-group">
+                                            <input type="email" class="form-control" placeholder="Введите Email"> </div>
+                                        <div class="form-group">
+                                            <textarea class="form-control" id="exampleTextarea" rows="3" placeholder="Сообщение"></textarea>
+                                        </div>
+                                        <button type="Submit" class="btn btn-info">ОТПРАВИТЬ</button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+                <!-- ============================================================== -->
+                <!-- User profile and search -->
+                <!-- ============================================================== -->
+                <ul class="navbar-nav my-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{% static 'frontPage/images/1.jpg' %}" alt="user" class="profile-pic" /></a>
+                        <div class="dropdown-menu dropdown-menu-right scale-up">
+                            <ul class="dropdown-user">
+                                <li>
+                                    <div class="dw-user-box">
+                                        <div class="u-img"><img src="{% static 'frontPage/images/1.jpg' %}" alt="user"></div>
+                                        <div class="u-text">
+                                            <h4>Имя Фамилия</h4>
+                                            <p class="text-muted">lalala@gmail.com</p>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="/account/settings"><i class="ti-settings"></i> Настройки аккаунта</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="/logout"><i class="fa fa-power-off"></i> Выйти</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!-- ============================================================== -->
+    <!-- End Topbar header -->
+    <!-- ============================================================== -->
+{% endblock %}
