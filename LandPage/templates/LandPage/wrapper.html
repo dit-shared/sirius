@@ -80,7 +80,6 @@
 {% block news %} {% include "LandPage/includes/news.html" %} {% endblock %}
 
 {% block partners %} {% include 'LandPage/includes/partners.html' %} {% endblock %}
-{% block tools %} {% include 'LandPage/includes/tools.html' %} {% endblock %}
 
 {% block footer %} {% include 'LandPage/includes/footer.html' %} {% endblock %}
 
@@ -130,6 +129,15 @@
 		);
 	</script>
 {% endif %}
+
+<!-- Carousel2 âñòàâèòü â êîöå body-->
+<script src="owlcarousel/dist/owl.carousel.js"></script>
+
+<script>
+	$(function() {
+		$ (".owl-carousel").owlCarousel();
+	});
+</script>
 
 </body>
 </html>
