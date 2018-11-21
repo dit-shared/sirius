@@ -1,0 +1,142 @@
+{% load staticfiles %}
+{% block featuser %}
+
+<div id="about2">
+<!-- About section START -->
+	<div class="section-block">
+		<div class="container">
+            <hr class="featurette-divider">
+
+            <div class="section-heading center-holder">
+				<br />
+				<h2>Наше решение</h2>
+			</div>
+			<div class="row">
+				<div class="col-md-8 col-sm-12 col-xs-12 wow fadeIn" data-wow-delay=".4s">
+						<h2>Сервис предсказывает расход воды на следующий месяц</h2>
+						<p style="font-size: 20px"> Предсказания построены на 2-х моделях машинного обучения: <br> модели классификации и модели регрессии.
+						</p>
+				</div>
+                <div class="col-md-4 col-sm-12 col-xs-12 wow fadeIn" data-wow-delay=".4s">
+                        <!--<img src="{% static 'LandPage/img/images/solution_main.jpg' %}" class="border-round img-shadow" alt="about-img">-->
+                        <img src="{% static 'LandPage/img/images/about_serv.png' %}" class="border-round img-shadow" alt="about-img">
+                              <!--<div class="col-md-5">-->
+            <!--<img class="featurette-image img-fluid mx-auto" alt="500x500" src="/static/pics/imgonline-com-ua-Negativ-MuA4Io2bxU.jpg" style="width: 900px; height: 330px;" data-holder-rendered="true">-->
+          <!--</div>-->
+						<!--<h2>Сервис предсказывает расход воды на следующий месяц.</h2>-->
+						<!--<p style="font-size: 20px"> Предсказания построены на 2-х моделях машинного обучения: <br> модели классификации и модели регрессии.-->
+						<!--</p>-->
+				</div>
+            </div>
+            <hr class="featurette-divider">
+            <div class="row">
+				<div class="col-md-5 col-sm-12 col-xs-12 wow fadeIn" data-wow-delay=".4s">
+                    <div style="width:100%;">
+                        <div class="chartjs-size-monitor" style="position: absolute; left: 0px; top: 0px; right: 0px; bottom: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;">
+                            <div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                <div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div>
+                            </div>
+                            <div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;">
+                                <div style="position:absolute;width:200%;height:200%;left:0; top:0"></div>
+                            </div>
+                        </div>
+                        <canvas id="canvas" width="2402" height="1800" class="chartjs-render-monitor" style="display: block; height: 600px; width: 1201px;"></canvas>
+                    </div>
+                    <br>
+                    <br>
+
+                    <script src="static/LandPage/js/Line Chart_last_files/customize.js"></script>
+                    <script async="" src="static/LandPage/js/Line Chart_last_files/analytics.js"></script>
+                    <script type="text/javascript" charset="utf-8" id="zm-extension" src="chrome-extension://fdcgdnkidjaadafnichfpabhfomcebme/scripts/webrtc-patch.js" async=""></script>
+                    <script src="static/LandPage/js/Line Chart_last_files/Chart.bundle.js"></script>
+
+                    <!--<img src="{% static 'LandPage/img/images/rocauc.png' %}" class="border-round img-shadow" alt="about-img">-->
+				</div>
+                <div class="col-md-7 col-sm-12 col-xs-12 wow fadeIn" data-wow-delay=".4s">
+                    <h2>Модель классификации</h2>
+						<p style="font-size: 20px"> Для возможности выбора режима напоминания используется модель классификации, которая выдает предсказание заполнения расхода на следующий месяц. Точность нашей текущей модели позволяет с высокой точностью предсказывать факт заполнения. <strong><b><br>ROC_AUC = 0.88</b></strong></p>
+						</p>
+                    <!--<div class="col-md-5">-->
+            <!--<img class="featurette-image img-fluid mx-auto" alt="500x500" src="/static/pics/imgonline-com-ua-Negativ-MuA4Io2bxU.jpg" style="width: 900px; height: 330px;" data-holder-rendered="true">-->
+          <!--</div>-->
+						<!--<h2>Сервис предсказывает расход воды на следующий месяц.</h2>-->
+						<!--<p style="font-size: 20px"> Предсказания построены на 2-х моделях машинного обучения: <br> модели классификации и модели регрессии.-->
+						<!--</p>-->
+				</div>
+            </div>
+            <hr class="featurette-divider">
+            <div class="row">
+				<div class="col-md-8 col-sm-12 col-xs-12 wow fadeIn" data-wow-delay=".4s">
+						<h2>Модель регрессии</h2>
+						<p class="lead">Предсказывается расход воды в квартире. <br>Используется модель LightGBM, точность которой составила:<strong><b><br>MAE = 1.38</b></strong></p>
+						</p>
+				</div>
+                <div class="col-md-4 col-sm-12 col-xs-12 wow fadeIn" data-wow-delay=".4s">
+                        <img src="{% static 'LandPage/img/images/Zadacha-regressii.jpg' %}" class="border-round img-shadow" alt="about-img">
+                              <!--<div class="col-md-5">-->
+            <!--<img class="featurette-image img-fluid mx-auto" alt="500x500" src="/static/pics/imgonline-com-ua-Negativ-MuA4Io2bxU.jpg" style="width: 900px; height: 330px;" data-holder-rendered="true">-->
+          <!--</div>-->
+						<!--<h2>Сервис предсказывает расход воды на следующий месяц.</h2>-->
+						<!--<p style="font-size: 20px"> Предсказания построены на 2-х моделях машинного обучения: <br> модели классификации и модели регрессии.-->
+						<!--</p>-->
+				</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+	<!-- About section END -->
+<!-- Top Articles START -->
+<!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>-->
+<!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>-->
+<!--<div class="section-block" id="features2">-->
+        <!--<hr class="featurette-divider">-->
+          <!--<p><a name="learnmore"></a></p>-->
+        <!--<div class="row featurette">-->
+
+          <!--<div class="col-md-7">-->
+            <!--<h2 class="featurette-heading">Решение <span class="text-muted"></span></h2>-->
+            <!--<p class="lead">Сервис предсказывает расход воды на следующий месяц. <br>Предсказания построены на 2-х моделях машинного обучения: <br> модели классификации и модели регрессии.</p>-->
+          <!--</div>-->
+          <!--<div class="col-md-5">-->
+            <!--<img class="featurette-image img-fluid mx-auto" alt="500x500" src="/static/pics/imgonline-com-ua-Negativ-MuA4Io2bxU.jpg" style="width: 900px; height: 330px;" data-holder-rendered="true">-->
+          <!--</div>-->
+        <!--</div>-->
+
+        <!--<hr class="featurette-divider">-->
+
+        <!--<div class="row featurette">-->
+          <!--<div class="col-md-7 order-md-2">-->
+<!--{#            <h2 class="featurette-heading">Модель классификации<span class="text-muted"></span></h2>#}-->
+              <!--<h2 style="font-size: 46px">Модель классификации<span class="text-muted"></span></h2>-->
+            <!--<p class="lead">Для возможности выбора режима напоминания используется модель классификации, которая выдает предсказание заполнения расхода на следующий месяц. Точность нашей текущей модели позволяет с высокой точностью предсказывать факт заполнения. <strong><b><br>ROC_AUC = 0.88</b></strong></p>-->
+          <!--</div>-->
+          <!--<div class="col-md-5 order-md-1">-->
+			<!--<img src="/static/pics/rocauc.png" class="featurette-image img-fluid mx-auto" alt="500x500" style="width: 500px; height: 300px;" data-holder-rendered="true">-->
+
+			<!--&lt;!&ndash; <img src="rocauc.png" class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="500x500" style="width: 500px; height: 500px;" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22500%22%20height%3D%22500%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20500%20500%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_164ad4fdffc%20text%20%7B%20fill%3A%23AAAAAA%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A25pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_164ad4fdffc%22%3E%3Crect%20width%3D%22500%22%20height%3D%22500%22%20fill%3D%22%23EEEEEE%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22185.13333129882812%22%20y%3D%22261.27999954223634%22%3E500x500%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true">-->
+          <!--&ndash;&gt;-->
+		  <!--</div>-->
+        <!--</div>-->
+        <!--<hr class="featurette-divider">-->
+
+        <!--<div class="row featurette">-->
+          <!--<div class="col-md-7">-->
+<!--{#            <h2 class="featurette-heading">Модель регрессии<span class="text-muted"></span></h2>#}-->
+              <!--<h2 style="font-size: 46px">Модель регрессии<span class="text-muted"></span></h2>-->
+            <!--<p class="lead">Предсказывается расход воды в квартире. <br>Используется модель LightGBM, точность которой составила:<strong><b><br>MAE = 1.38</b></strong></p>-->
+          <!--</div>-->
+          <!--<div class="col-md-5">-->
+            <!--<img src="/static/pics/Zadacha-regressii.jpg" class="featurette-image img-fluid mx-auto" alt="500x500" style="width: 600px; height: 300px;" data-holder-rendered="true">-->
+          <!--</div>-->
+        <!--</div>-->
+
+        <!--<hr class="featurette-divider">-->
+
+		<!--</div>-->
+	<!--</div>-->
+<!--</div>-->
+<!-- Top Articles END -->
+
+{% endblock %}
