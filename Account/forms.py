@@ -45,11 +45,11 @@ class ChangeMail(forms.ModelForm):
         self.fields['confirmMail'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Повторите почту', })
 
 class ChangeExtUserInfo(forms.ModelForm):
-    adress = forms.CharField(label='Ваше имя')
-    phone = forms.CharField(label='Ваша фамилия')
-    ava = forms.ImageField(label='Аватарка', widget=forms.FileInput())
-    total_square = forms.IntegerField(label='Площадь помещения')
-    cnt_fiodr = forms.IntegerField(label='Количество проживающих людей')
+    adress = forms.CharField(label='Ваше имя', required=False)
+    phone = forms.CharField(label='Ваша фамилия', required=False)
+    ava = forms.ImageField(label='Аватарка', widget=forms.FileInput(), required=False)
+    total_square = forms.IntegerField(label='Площадь помещения', required=False)
+    cnt_fiodr = forms.IntegerField(label='Количество проживающих людей', required=False)
     class Meta:
         model = ExtUser
         fields = {'adress', 'phone', 'ava', 'total_square', 'cnt_fiodr'}
@@ -62,9 +62,9 @@ class ChangeExtUserInfo(forms.ModelForm):
         self.fields['cnt_fiodr'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Кол-во жителей', })
 
 class ChangeUserInfo(forms.ModelForm):
-    name = forms.CharField(label='Ваше имя')
-    surname = forms.CharField(label='Ваша фамилия')
-    patronymic = forms.CharField(label='Ваше отчество')
+    name = forms.CharField(label='Ваше имя', required=False)
+    surname = forms.CharField(label='Ваша фамилия', required=False)
+    patronymic = forms.CharField(label='Ваше отчество', required=False)
     class Meta:
         model = DefaultUser
         fields = {'surname', 'name', 'patronymic'}

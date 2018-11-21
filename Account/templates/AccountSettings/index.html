@@ -5,6 +5,13 @@
     <title>Mos.AI - электричество</title>
     {% load staticfiles %}
     {% block head %} {% include 'Account/head.html' %} {% endblock %}
+
+<style>
+    .marginleft{
+        margin-left: 20%;
+    }
+</style>
+
 </head>
 <body class="fix-header fix-sidebar card-no-border">
 <!-- ============================================================== -->
@@ -26,7 +33,7 @@
             <!-- ============================================================== -->
             <div class="row page-titles">
                 <div class="col-md-5 align-self-center">
-                    <h3 class="text-themecolor">Настройки</h3>
+                    <h3 class="text-themecolor"><font size = "">Настройки</font></h3>
                 </div>
                 <div class="col-md-7 align-self-center">
                     <ol class="breadcrumb">
@@ -39,60 +46,61 @@
                 </div>
             </div>
 
-            <center>
-            <div class="col-lg-3 col-xlg-2 m-b-30">
-                <form method="post" action="/account/changeStandartInfo/">
-                    {% csrf_token %}
-                    <h1>Изменить стандартную информацию</h1>
-                     {% for field in defUserInfo %}
-                        <div class="form-group">
-                            {{ field }}
-                        </div>
-                    {% endfor %}
-                    <button type="Submit" class="btn btn-info">Сменить пароль</button>
-                </form>
-                <br />
-                <br />
-                <form method="POST" action="/account/changeExtendedInfo/" enctype="multipart/form-data">
-                    {% csrf_token %}
-                    <h1>Изменить расширенную информацию</h1>
-                     {% for field in extUserInfo %}
-                        <div class="form-group">
-                            {{ field }}
-                        </div>
-                    {% endfor %}
-                    {% for error in extUserInfo.errors %}
-                            <div class="alert alert-danger">
-                                <strong>{{ error }}</strong>
+            <div class = "row marginleft">
+                <div class="col-lg-3 col-xlg-2 m-b-30">
+                    <form method="post" action="/account/changeStandartInfo/">
+                        {% csrf_token %}
+                        <h1>Изменить стандартную информацию</h1>
+                         {% for field in defUserInfo %}
+                            <div class="form-group">
+                                {{ field }}
                             </div>
                         {% endfor %}
-                        {% for error in extUserInfoErrors %}
-                            <div class="alert alert-danger">
-                                <strong>{{ error }}</strong>
+                        <button type="Submit" class="btn btn-info">Сменить пароль</button>
+                    </form>
+                    <form method="POST" action="/account/changeExtendedInfo/" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <h1>Изменить расширенную информацию</h1>
+                         {% for field in extUserInfo %}
+                            <div class="form-group">
+                                {{ field }}
                             </div>
                         {% endfor %}
-                    <button type="submit" class="btn btn-info">Сменить пароль</button>
-                </form>
-                <br /> <br />
-                <form>
-                    <h1>Сменить пароль</h1>
-                     {% for field in changePass %}
-                        <div class="form-group">
-                            {{ field }}
-                        </div>
-                    {% endfor %}
-                    <button type="Submit" class="btn btn-info">Сменить пароль</button>
-                </form>
-                <br/> <br />
-                <form>
-                    <h1>Изменить Email</h1>
-                    {% for field in changeMail %}
-                        <div class="form-group">
-                            {{ field }}
-                        </div>
-                    {% endfor %}
-                    <button type="Submit" class="btn btn-info">Изменить Email</button>
-                </form>
+                        {% for error in extUserInfo.errors %}
+                                <div class="alert alert-danger">
+                                    <strong>{{ error }}</strong>
+                                </div>
+                            {% endfor %}
+                            {% for error in extUserInfoErrors %}
+                                <div class="alert alert-danger">
+                                    <strong>{{ error }}</strong>
+                                </div>
+                            {% endfor %}
+                        <button type="submit" class="btn btn-info">Сменить пароль</button>
+                    </form>
+                </div>
+                <div class="col-lg-3 col-xlg-2 m-b-1000">
+                    <form>
+                        <h1>Сменить пароль</h1>
+                         {% for field in changePass %}
+                            <div class="form-group">
+                                {{ field }}
+                            </div>
+                        {% endfor %}
+                        <button type="Submit" class="btn btn-info">Сменить пароль</button>
+                    </form>
+                </div>
+                <div class="col-lg-3 col-xlg-2 m-b-1000">
+                    <form>
+                        <h1>Изменить Email</h1>
+                        {% for field in changeMail %}
+                            <div class="form-group">
+                                {{ field }}
+                            </div>
+                        {% endfor %}
+                        <button type="Submit" class="btn btn-info">Изменить Email</button>
+                    </form>
+                </div>
             </div>
             </center>
             {% block rightSideBar %} {% include 'Account/rightSideBar.html' %} {% endblock %}
