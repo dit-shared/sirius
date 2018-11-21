@@ -1,5 +1,6 @@
 from django.urls import path
-from . import views
+from . import views, accountSettings
+from . import meters
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -8,5 +9,8 @@ urlpatterns = [
     path('changeMode/', views.changeMode, name='changeMode'),
     path('predictElectricity/', views.predictElectricity, name='predictElectricity'),
     path('predictWater/', views.predictWater, name='predictWater'),
-    path('settings/', views.settings, name='settings')
+    path('settings/', views.settings, name='settings'),
+    path('changeExtendedInfo/', accountSettings.changeExtUserInfo, name='changeExtendedInfo'),
+    path('changeStandartInfo/', accountSettings.changeStandartUserInfo, name='changeStandartUserInfo'),
+    path('test/', accountSettings.test, name='test')
 ]

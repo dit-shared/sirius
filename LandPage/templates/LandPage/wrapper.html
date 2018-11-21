@@ -132,12 +132,27 @@
 
 <!-- Carousel2 âñòàâèòü â êîöå body-->
 <script src="owlcarousel/dist/owl.carousel.js"></script>
-
-<script>
-	$(function() {
+	<script>
+		$(function() {
+			//items:5;
 		$ (".owl-carousel").owlCarousel();
-	});
-</script>
+		});
+	</script>
 
+	<script>
+		$("#owl-carousel-tools").owlCarousel({
+		 items:5,
+		 loop:true,
+		 autoplay:true,
+		 autoplayTimeout:1000,
+		});
+	</script>
+
+	<script>
+		$("#owl-carousel-partners").owlCarousel({
+		 items:5,
+		 loop:true,
+		});
+	</script>
 </body>
 </html>

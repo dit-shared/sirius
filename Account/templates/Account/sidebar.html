@@ -6,7 +6,12 @@
                 <!-- User profile -->
                 <div class="user-profile">
                     <!-- User profile image -->
-                    <div class="profile-img"> <img src="{% static 'frontPage/images/1.jpg' %}" alt="user" />
+                    <div class="profile-img">
+                        {% if extUser.ava %}
+                                <img src="{{ extUser.ava.url }}" alt="user"  />
+                            {% else %}
+                                <img src="{% static 'frontPage/images/1.jpg' %}" alt="user" />
+                        {% endif %}
                         <!-- this is blinking heartbit-->
                         <div class="notify setpos"> <span class="heartbit"></span> <span class="point"></span> </div>
                     </div>

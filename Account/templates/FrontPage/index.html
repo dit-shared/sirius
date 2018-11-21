@@ -51,72 +51,113 @@
                 <!-- Row -->
                 <div class="row">
                     <!-- Column -->
-                    <div class="col-lg-8 col-xlg-9">
+                    <div class="col-lg-4 col-xlg-3 col-md-5">
                         <div class="card">
                             <div class="card-body">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="d-flex flex-wrap">
-                                            <div>
-                                                <h4 class="card-title">Счетчики воды</h4>
+                                <center class="m-t-30">
+                                    {% if extUser.ava %}
+                                            <img src="{{ extUser.ava.url }}" alt="user" class="img-circle" width="150"   />
+                                        {% else %}
+                                            <img src="{% static 'frontPage/images/1.jpg' %}" alt="user" class="img-circle" width="150" />
+                                    {% endif %}
+
+                                    <h4 class="card-title m-t-10">
+                                        {% if user.name == "" and user.surname == "" %}
+                                            Ваш профиль
+                                        {% endif %}
+                                        {% if user.surname != "" %}
+                                            {{ user.name }}
+                                        {% endif %}
+                                        {% if user.name != "" %}
+                                            {{ user.surname }}
+                                        {% endif %}
+                                    </h4>
+                                </center>
+                            </div>
+                            <div>
+                                <hr> </div>
+                            <div class="card-body">
+                                <small class="text-muted">E-Mail</small>
+                                <h6>{{ user.mail }}</h6>
+
+                                {% if extUser.adress %}
+                                    <small class="text-muted p-t-30 db">Адресс</small>
+                                    <h6>{{ extUser.adress }}</h6>
+                                {% endif %}
+
+                                {% if extUser.phone %}
+                                    <small class="text-muted p-t-30 db">Номер телефона</small>
+                                    <h6> {{ extUser.phone }} </h6>
+                                {% endif %}
+                                <!--<small class="text-muted p-t-30 db">Соцсети</small>-->
+                                <!--<br/>-->
+                                <!--<button class="btn btn-circle btn-secondary"><i class="fa fa-facebook"></i></button>-->
+                                <!--<button class="btn btn-circle btn-secondary"><i class="fa fa-vk"></i></button>-->
+                                <!--<button class="btn btn-circle btn-secondary"><i class="fa fa-github"></i></button>-->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Column -->
+                    <!-- Column -->
+                    <div class="col-lg-8 col-xlg-9 col-md-7">
+                        <div class="card">
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs profile-tab" role="tablist">
+                                <li class="nav-item"> <a class="nav-link active" data-toggle="tab" href="#home" role="tab">Карта</a> </li>
+                                <li class="nav-item"> <a class="nav-link" data-toggle="tab" href="#profile" role="tab">Данные по дому</a> </li>
+                            </ul>
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+                                <div class="tab-pane active" id="home" role="tabpanel">
+                                    <div class="card-body">
+                                            <div class="map">
+                                                <script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Aafbd59ab4c6c5815b5764d107fe0eab282a573f8bedf375ec8274dd059aeaf46&amp;width=670&amp;height=420&amp;lang=ru_RU&amp;scroll=true"></script>
                                             </div>
-                                            <div class="ml-auto">
-                                                <ul class="list-inline">
-                                                    <li>
-                                                        <p style="color: #FF8080;"><i class="fa fa-circle font-10 m-r-10" style="color: #FF8080;"></i>Горячая вода</h6> </li>
-                                                    <li>
-                                                        <h6 class="text-muted  text-info"><i class="fa fa-circle font-10 m-r-10"></i>Холодная вода</h6> </li>
-                                                </ul>
+                                    </div>
+                                </div>
+                                <!--second tab-->
+                                <div class="tab-pane" id="profile" role="tabpanel">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-md-3 col-xs-6 b-r"> <strong>Адрес</strong>
+                                                <br>
+                                                <p class="text-muted">Москва, ул. Арабат, 1</p>
+                                            </div>
+                                            <div class="col-md-3 col-xs-6 b-r"> <strong>Данные1</strong>
+                                                <br>
+                                                <p class="text-muted">Развернутые данные1</p>
+                                            </div>
+                                            <div class="col-md-3 col-xs-6 b-r"> <strong>Данные2</strong>
+                                                <br>
+                                                <p class="text-muted">Развернутые Данные2</p>
+                                            </div>
+                                            <div class="col-md-3 col-xs-6"> <strong>Данные3</strong>
+                                                <br>
+                                                <p class="text-muted">Развернутые Данные3</p>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-12">
-                                        <div id="earning" style="height: 355px;"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-xlg-3">
-                        <div class="card card-inverse card-success">
-                            <div class="card-body card-body-hot">
-                                <div class="d-flex">
-                                    <div class="m-r-20 align-self-center">
-                                        <h1 class="text-white"><i class="ti-pie-chart"></i></h1></div>
-                                    <div>
-                                        <h3 class="card-title">Среднее показание горячей воды в месяц</font></h3>
-                                        <h6 class="card-subtitle">2018</h6> </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-6 align-self-center">
-                                        <h2 class="font-light text-white">11089</h2>
-                                    </div>
-                                    <div class="col-6 p-t-10 p-b-20 text-right">
-                                        <div class="spark-count2" style="height:65px"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card card-inverse card-success">
-                            <div class="card-body card-body-cold">
-                                <div class="d-flex">
-                                    <div class="m-r-20 align-self-center">
-                                        <h1 class="text-white"><i class="ti-pie-chart"></i></h1></div>
-                                    <div>
-                                        <h3 class="card-title"><font = "black">Среднее показание холодной воды в месяц</font></h3>
-                                        <h6 class="card-subtitle"><font = "black">2018</font></h6> </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-6 align-self-center">
-                                        <h2 class="font-light text-white">5637</h2>
-                                    </div>
-                                    <div class="col-6 p-t-10 p-b-20 text-right align-self-center">
-                                        <div class="spark-count2" style="height:65px"></div>
+                                        <hr>
+                                        <p class="m-t-30">Описание дома</p>
+                                        <h4 class="font-medium m-t-30">Статистика</h4>
+                                        <hr>
+                                        <h5 class="m-t-30">Статистика 1<span class="pull-right">80%</span></h5>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-success" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width:80%; height:6px;"> <span class="sr-only">50% Complete</span> </div>
+                                        </div>
+                                        <h5 class="m-t-30">Статистика 2<span class="pull-right">90%</span></h5>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-info" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width:90%; height:6px;"> <span class="sr-only">50% Complete</span> </div>
+                                        </div>
+                                        <h5 class="m-t-30">Статистика 3<span class="pull-right">50%</span></h5>
+                                        <div class="progress">
+                                            <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:50%; height:6px;"> <span class="sr-only">50% Complete</span> </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <!-- Column -->
                 </div>
                 <!-- Row -->
                 {% block rightSideBar %} {% include 'Account/rightSideBar.html' %} {% endblock %}

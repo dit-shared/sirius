@@ -41,23 +41,56 @@
 
             <center>
             <div class="col-lg-3 col-xlg-2 m-b-30">
-                <form>
-                    <h1>Сменить пароль</h1>
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="exampleInputname1" placeholder="Старый пароль"></div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="exampleInputname1" placeholder="Новый пароль"></div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="exampleInputname1" placeholder="Подтвердите пароль"></div>
+                <form method="post" action="/account/changeStandartInfo/">
+                    {% csrf_token %}
+                    <h1>Изменить стандартную информацию</h1>
+                     {% for field in defUserInfo %}
+                        <div class="form-group">
+                            {{ field }}
+                        </div>
+                    {% endfor %}
                     <button type="Submit" class="btn btn-info">Сменить пароль</button>
                 </form>
-                <br>
+                <br />
+                <br />
+                <form method="POST" action="/account/changeExtendedInfo/" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <h1>Изменить расширенную информацию</h1>
+                     {% for field in extUserInfo %}
+                        <div class="form-group">
+                            {{ field }}
+                        </div>
+                    {% endfor %}
+                    {% for error in extUserInfo.errors %}
+                            <div class="alert alert-danger">
+                                <strong>{{ error }}</strong>
+                            </div>
+                        {% endfor %}
+                        {% for error in extUserInfoErrors %}
+                            <div class="alert alert-danger">
+                                <strong>{{ error }}</strong>
+                            </div>
+                        {% endfor %}
+                    <button type="submit" class="btn btn-info">Сменить пароль</button>
+                </form>
+                <br /> <br />
                 <form>
-                <h1>Изменить Email</h1>
-                    <div class="form-group">
-                        <input type="email" class="form-control" placeholder="Введите Email"> </div>
-                    <div class="form-group">
-                        <input type="email" class="form-control" placeholder="Подтвердите Email"> </div>
+                    <h1>Сменить пароль</h1>
+                     {% for field in changePass %}
+                        <div class="form-group">
+                            {{ field }}
+                        </div>
+                    {% endfor %}
+                    <button type="Submit" class="btn btn-info">Сменить пароль</button>
+                </form>
+                <br/> <br />
+                <form>
+                    <h1>Изменить Email</h1>
+                    {% for field in changeMail %}
+                        <div class="form-group">
+                            {{ field }}
+                        </div>
+                    {% endfor %}
                     <button type="Submit" class="btn btn-info">Изменить Email</button>
                 </form>
             </div>
