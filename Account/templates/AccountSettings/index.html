@@ -49,12 +49,23 @@
 
             <div class = "row marginleft">
                 <div class="col-lg-3 col-xlg-2 m-b-30">
-                    <form>
+                    <form method="POST" action="/account/changePassword/">
+                        {% csrf_token %}
                         <h2>Сменить пароль</h2>
                          {% for field in changePass %}
                             <div class="form-group">
                                 {{ field }}
                             </div>
+                        {% endfor %}
+                        {% for error in changePass.errors %}
+                                <div class="alert alert-danger">
+                                    <strong>{{ error }}</strong>
+                                </div>
+                            {% endfor %}
+                            {% for error in changePassErrors %}
+                                <div class="alert alert-danger">
+                                    <strong>{{ error }}</strong>
+                                </div>
                         {% endfor %}
                         <button type="Submit" class="btn btn-info">Сменить пароль</button>
                     </form>

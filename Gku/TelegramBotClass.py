@@ -27,3 +27,7 @@ class TelegramBot:
             last_update = get_result[len(get_result)]
 
         return last_update
+
+def send(token, chat_id, text):
+    telegram_bot_obj = TelegramBot(token)
+    return telegram_bot_obj.send_message(chat_id, text)

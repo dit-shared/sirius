@@ -12,5 +12,7 @@ urlpatterns = [
     path('settings/', views.settings, name='settings'),
     path('changeExtendedInfo/', accountSettings.changeExtUserInfo, name='changeExtendedInfo'),
     path('changeStandartInfo/', accountSettings.changeStandartUserInfo, name='changeStandartUserInfo'),
+    path('changePassword/', accountSettings.changePassword, name='changePassword'),
+    path('feedback/', views.feedback, name='feedback'),
     path('test/', accountSettings.test, name='test')
 ]

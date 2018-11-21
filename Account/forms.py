@@ -77,8 +77,13 @@ class ChangeUserInfo(forms.ModelForm):
 
 class SendFeedback(forms.ModelForm):
     title = forms.CharField(label='Заголовок')
-    text = forms.CharField(label='Описание проблемы')
+    text = forms.CharField(widget=forms.TextInput)
 
     class Meta:
         model = FeedbackRecord
         fields = {'title', 'text'}
+
+    def __init__(self, *args, **kwargs):
+        super(SendFeedback, self).__init__(*args, **kwargs)
+        self.fields['title'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Кратко опишите проблему', })
+        self.fields['text'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Дайте развенутое описание проблемы', 'rows': '3'})

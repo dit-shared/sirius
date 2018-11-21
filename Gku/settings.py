@@ -51,7 +51,6 @@ INSTALLED_APPS = [
     'snowpenguin.django.recaptcha2',
     'Account',
     'LandPage',
-    'TelegramBot',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -105,6 +104,8 @@ DATABASES = {
     }
 }
 
+FEEDBACK_TELEGRAM_BOT_KEY = '560497318:AAFApTmjXY-3OgCPutovBW230x82d5ep08Y'
+FEEDBACK_TELEGRAM_CHAT_ID = 560497318
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators

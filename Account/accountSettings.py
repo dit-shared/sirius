@@ -77,7 +77,7 @@ def changeStandartUserInfo(request):
         else:
             changePassForm = forms.ChangePassword()
             changeMailForm = forms.ChangeMail()
-            extUserForm = forms.ExtUser()
+            extUserForm = forms.ChangeExtUserInfo()
             return render(request, 'AccountSettings/index.html',
                           {'defUserInfo': defaultUserInfoForm, 'extUserInfo': extUserForm,
                            'changePass': changePassForm, 'changeMail': changeMailForm, 'extUserInfoErrors': errors, })
@@ -88,31 +88,34 @@ def changePassword(request):
         return HttpResponseRedirect('/logout')
     if request.method == 'POST':
         errors = list()
-        changePassForm = forms.ChangePassword(request.method)
+        changePassForm = forms.ChangePassword(request.POST)
         if changePassForm.is_valid():
             oldpass = request.POST['oldpass']
             newpass = request.POST['newpass']
             repass = request.POST['repass']
 
-            user = DefaultUser.objects.filter(id=request.session['id'])
+            user = DefaultUser.objects.get(id=request.session['id'])
             user.decrypt()
 
             hashedOldPass = HashPassword(oldpass)
-            if hashedOldPass != oldpass:
+            if hashedOldPass != user.password:
                 errors.append('Неверный пароль!')
             else:
-                if newpass != repass:
+                if newpass == oldpass:
+                    errors.append('Придумайте новый пароль!')
+                elif newpass != repass:
                     errors.append('Новые пароли не совпадают!')
                 else:
-                    DefaultUser.objects.get(id=request.session['id']).update(password=StandartEncryptField(HashPassword(newpass), settings.AES_DEFAULT_KEY))
+                    DefaultUser.objects.filter(id=request.session['id']).update(password=StandartEncryptField(HashPassword(newpass), settings.AES_DEFAULT_KEY))
                     return render(request, 'OK/index.html', {'title': 'Отлично!', 'msg': 'Ваш пароль успешно изменен.', 'link': 'account'})
-        changePassForm = forms.ChangePassword()
         changeMailForm = forms.ChangeMail()
-        extUserForm = forms.ExtUser()
-        defaultUserInfoForm = forms.DefaultUser()
+        extUserForm = forms.ChangeExtUserInfo()
+        defaultUserInfoForm = forms.ChangeUserInfo()
         return render(request, 'AccountSettings/index.html',
                       {'defUserInfo': defaultUserInfoForm, 'extUserInfo': extUserForm,
-                       'changePass': changePassForm, 'changeMail': changeMailForm, 'extUserInfoErrors': errors, })
+                       'changePass': changePassForm, 'changeMail': changeMailForm, 'changePassErrors': errors, })
+    return HttpResponseRedirect('/account')
+
 def test(request):
     v = 'asd'
     b = base64.b64encode(v)
