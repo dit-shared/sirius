@@ -3,12 +3,12 @@ from Gku import crypto, settings
 import re, random
 
 class ExtUser(models.Model):
-    user_id = models.IntegerField(max_length=16)
+    user_id = models.IntegerField()
     adress = models.CharField(max_length=128)
     phone = models.CharField(max_length=128)
     ava = models.ImageField()
-    total_square = models.IntegerField(max_length=32)
-    cnt_fiodr = models.IntegerField(max_length=32)
+    total_square = models.IntegerField(blank=True, default=0)
+    cnt_fiodr = models.IntegerField(blank=True, default=0)
 
     def encrypt(self):
         aes = crypto.AESCipher(settings.AES_DEFAULT_KEY)
@@ -36,17 +36,17 @@ class ExtUser(models.Model):
         super(ExtUser, self).save(*args, **kwargs)
 
 class WaterMeters(models.Model):
-    user_id = models.IntegerField(max_length=16)
+    user_id = models.IntegerField()
     date = models.DateField()
-    value = models.IntegerField(max_length=16)
+    value = models.IntegerField()
 
 class ElectricityMeters(models.Model):
-    user_id = models.IntegerField(max_length=16)
+    user_id = models.IntegerField()
     date = models.DateField()
-    value = models.IntegerField(max_length=16)
-    zone = models.IntegerField(max_length=5)
+    value = models.IntegerField()
+    zone = models.IntegerField()
 
 class FeedbackRecord(models.Model):
-    user_id = models.IntegerField(max_length=16)
+    user_id = models.IntegerField()
     title = models.CharField(max_length=64)
     text = models.CharField(max_length=2048)

@@ -62,14 +62,12 @@
                                     {% endif %}
 
                                     <h4 class="card-title m-t-10">
-                                        {% if user.name == "" and user.surname == "" %}
+                                        {% if user.name != "" and user.surname != "" %}
+                                            {{user.name}} {{user.surname}}
+                                        {% elif user.name != "" %}
+                                            {{user.name}}
+                                        {% else %}
                                             Ваш профиль
-                                        {% endif %}
-                                        {% if user.surname != "" %}
-                                            {{ user.name }}
-                                        {% endif %}
-                                        {% if user.name != "" %}
-                                            {{ user.surname }}
                                         {% endif %}
                                     </h4>
                                 </center>

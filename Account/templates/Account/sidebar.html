@@ -17,7 +17,13 @@
                     </div>
                     <!-- User profile text-->
                     <div class="profile-text">
-                        <h5>Имя Фамилия</h5>
+                        {% if user.name != "" and user.surname != "" %}
+                            <h5>{{user.name}} {{user.surname}}</h5>
+                        {% elif user.name != "" %}
+                            <h5>{{user.name}}</h5>
+                        {% else %}
+                            <h5>Ваш профиль</h5>
+                        {% endif %}
                         <a href="#" class="dropdown-toggle u-dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="true"><i class="mdi mdi-settings"></i></a>
                         <!-- <a href="app-email.html" class="" data-toggle="tooltip" title="Email"><i class="mdi mdi-gmail"></i></a> -->
                         <a href="/logout" class="" data-toggle="tooltip" title="Выйти"><i class="mdi mdi-power"></i></a>

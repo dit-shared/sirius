@@ -75,10 +75,12 @@
                                             {% endif %}
                                         </div>
                                         <div class="u-text">
-                                            {% if user.name == "" and user.surname == "" %}
-                                                <h4>Пользователь</h4>
-                                            {% else %}
+                                            {% if user.name != "" and user.surname != "" %}
                                                 <h4>{{user.name}} {{user.surname}}</h4>
+                                            {% elif user.name != "" %}
+                                                <h4>{{user.name}}</h4>
+                                            {% else %}
+                                                <h4>Профиль пользователя</h4>
                                             {% endif %}
                                             <p class="text-muted">{{user.mail}}</p>
                                         </div>
