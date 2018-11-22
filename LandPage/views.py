@@ -313,8 +313,9 @@ def chkMail(mail):
 
 def test(request):
     user = DefaultUser()
-    user.login = 'tmp_user'
-    user.password = 'loopa_poopa'
+    user.login = 'sirius'
+    user.password = 'sirius'
+    user.mail = 'asd@asd.asd'
     user.hashPass()
     user.genActivationKey(2)
     user.encrypt()
