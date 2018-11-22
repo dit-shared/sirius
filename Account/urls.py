@@ -20,4 +20,5 @@ urlpatterns = [
     path('addWaterMeters/', meters.addWaterVal, name='addWaterVal'),
     path('getPredictionsWater/', meters.getPredictionsWater, name='getPredictionsWater'),
     path('getPredictionsElectricity/', meters.getPredictionsElectricity, name='getPredictionsElectricity'),
+    # path('calendar/', views.calendar, name='calendar'),
 ]

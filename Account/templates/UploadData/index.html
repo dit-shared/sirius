@@ -6,8 +6,7 @@
     {% block head %} {% include 'Account/head.html' %} {% endblock %}
     <style>
         .cntr_forms {
-            margin-left: 25%;
-            margin-right: 20%;
+            margin-right: 5%;
         }
     </style>
 </head>
@@ -37,8 +36,9 @@
                 </label>
             </div> -->
 <br>
- <div class="col-lg-3 col-xlg-2 m-b-30 cntr_forms">
+ <div class="col-lg-3 col-xlg-2 cntr_forms">
      <h2>Вода</h2>
+     <div>
      <form method="post" action="/account/addWaterMeters/">
      {% csrf_token %}
          {% for field in addWaterForm %}
@@ -59,7 +59,9 @@
         <button type="Submit" class="btn btn-info">Отправить</button>
     <br /><br /><br />
      </form>
+     </div>
      <h2>Электричество</h2>
+     <div>
     <form class="form-horizontal" method="post" action="/account/addElectricityMeters/">
      {% csrf_token %}
      {% for field in addElectForm %}
@@ -79,6 +81,7 @@
     {% endif %}
         <button type="Submit" class="btn btn-info">Отправить</button>
     </form>
+     </div>
  </div>
             <!-- ============================================================== -->
             <!-- End Bread crumb and right sidebar toggle -->

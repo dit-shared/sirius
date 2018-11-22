@@ -31,7 +31,7 @@ class DefaultUser(models.Model):
     mail = models.EmailField(max_length=128, blank=True)
     activationKey = models.CharField(max_length=128)
     activationType = models.IntegerField(default=0)
-    activationDate = models.DateTimeField(max_length=64, default=None)
+    activationDate = models.DateTimeField(max_length=64, auto_now=True)
     creationDate = models.DateTimeField(max_length=64, auto_now=True)
 
     def __str__(self):

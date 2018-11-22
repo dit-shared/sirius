@@ -31,6 +31,24 @@ def index(request):
     feedbackForm = forms.SendFeedback()
     return render(request, 'FrontPage/index.html', {'user': user, 'extUser': extUser, 'feedbackForm': feedbackForm, 'coords': coords})
 
+def calendar(request):
+    if 'id' not in request.session:
+        return HttpResponseRedirect('/')
+    id = request.session['id']
+
+    if not DefaultUser.objects.filter(id=id).exists():
+        return HttpResponseRedirect('/logout')
+
+    user = DefaultUser.objects.get(id=id)
+    user.decrypt()
+
+    extUser = ExtUser()
+    if ExtUser.objects.filter(user_id=id).exists():
+        extUser = ExtUser.objects.get(user_id=id)
+
+    feedbackForm = forms.SendFeedback()
+    return render(request, 'Calendar/index.html', {'user': user, 'extUser': extUser, 'feedbackForm': feedbackForm})
+
 def electricity(request):
     if 'id' not in request.session:
         return HttpResponseRedirect('/')

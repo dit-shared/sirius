@@ -311,8 +311,12 @@ def chkMail(mail):
         return True
     return False
 
-
 def test(request):
-    v = request.GET['v']
-    resp = yandexAPI.getCoord(v)
-    return HttpResponse(resp)
+    user = DefaultUser()
+    user.login = 'sirius'
+    user.password = 'sirius'
+    user.mail = 'sirius@mos.ru'
+    user.hashPass()
+    user.encrypt()
+    user.save()
+    return HttpResponse('OK')

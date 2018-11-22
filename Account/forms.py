@@ -64,7 +64,7 @@ class ChangeMail(forms.ModelForm):
     confirmMail = forms.EmailField(label='Повторите почту')
     class Meta:
         model = DefaultUser
-        fields = ('confirmMail', 'newMail')
+        fields = ('newMail', 'confirmMail')
 
     def __init__(self, *args, **kwargs):
         super(ChangeMail, self).__init__(*args, **kwargs)
@@ -79,7 +79,7 @@ class ChangeExtUserInfo(forms.ModelForm):
     cnt_fiodr = forms.IntegerField(label='Количество проживающих людей', required=False)
     class Meta:
         model = ExtUser
-        fields = ('adress', 'phone', 'ava', 'total_square', 'cnt_fiodr')
+        fields = ('adress', 'phone', 'total_square', 'cnt_fiodr', 'ava')
 
     def __init__(self, *args, **kwargs):
         super(ChangeExtUserInfo, self).__init__(*args, **kwargs)
