@@ -23,10 +23,10 @@ def index(request):
         extUser = ExtUser.objects.get(user_id=id)
 
     coords = {'l': 0, 'p': 0}
-    if extUser.adress != '':
-        resp = yandexAPI.getCoord(extUser.adress).split(' ')
-        coords['l'] = resp[0]
-        coords['p'] = resp[1]
+    # if extUser.adress != '':
+    #     resp = yandexAPI.getCoord(extUser.adress).split(' ')
+    #     coords['l'] = resp[0]
+    #     coords['p'] = resp[1]
 
     feedbackForm = forms.SendFeedback()
     return render(request, 'FrontPage/index.html', {'user': user, 'extUser': extUser, 'feedbackForm': feedbackForm, 'coords': coords})
