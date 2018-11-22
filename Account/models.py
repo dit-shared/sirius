@@ -40,13 +40,22 @@ class WaterMeters(models.Model):
     date = models.DateField()
     value = models.IntegerField()
 
+    def __str__(self):
+        return str(self.date)
+
 class ElectricityMeters(models.Model):
     user_id = models.IntegerField()
     date = models.DateField()
     value = models.IntegerField()
     zone = models.IntegerField()
 
+    def __str__(self):
+        return str(self.date)
+
 class FeedbackRecord(models.Model):
     user_id = models.IntegerField()
     title = models.CharField(max_length=64)
     text = models.CharField(max_length=2048)
+
+    def __str__(self):
+        return str(self.title)

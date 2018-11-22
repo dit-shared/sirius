@@ -4,9 +4,9 @@ from .models import WaterMeters, ElectricityMeters, FeedbackRecord, ExtUser
 from snowpenguin.django.recaptcha2.fields import ReCaptchaField
 from snowpenguin.django.recaptcha2.widgets import ReCaptchaWidget
 
-dateChoices = (('Январь', 'Январь'),('Февраль','Февраль'),('Март','Март'),('Апрель','Апрель'),('Май','Май'), ('Июнь','Июнь'),
-               ('Июль', 'Июль'), ('Август','Август'), ('Сентябрь','Сентябрь'), ('Октябрь','Октябрь'), ('Ноябрь','Ноябрь'),
-               ('Декабрь','Декабрь'))
+dateChoices = ((1, 'Январь'),(2,'Февраль'),(3,'Март'),(4,'Апрель'),(5,'Май'), (6,'Июнь'),
+               (7, 'Июль'), (8,'Август'), (9,'Сентябрь'), (10,'Октябрь'), (11,'Ноябрь'),
+               (12,'Декабрь'))
 
 zoneChoices = ((1, 'ночь'), (2, 'день'), (3, 'пик'), (4, 'полупик'))
 yearsChoices = ((2016, 2016), (2017, 2017), (2018, 2018))

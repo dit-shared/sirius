@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     {% load staticfiles %}
     {% block head %} {% include 'Account/head.html' %} {% endblock %}
+    <style>
+        .cntr_forms {
+            margin-left: 25%;
+            margin-right: 20%;
+        }
+    </style>
 </head>
 <body>
     <div class="preloader">
@@ -31,7 +37,8 @@
                 </label>
             </div> -->
 <br>
- <div class="col-lg-3 col-xlg-2 m-b-30">
+ <div class="col-lg-3 col-xlg-2 m-b-30 cntr_forms">
+     <h2>Вода</h2>
      <form method="post" action="/account/addWaterMeters/">
      {% csrf_token %}
          {% for field in addWaterForm %}
@@ -40,13 +47,19 @@
             </div>
          {% endfor %}
          {% for error in addWaterForm.errors %}
-                <div class="alert alert-danger">
-                    <strong>{{ error }}</strong>
-                </div>
+            <div class="alert alert-danger">
+                <strong>{{ error }}</strong>
+            </div>
         {% endfor %}
+         {% if waterOK == True %}
+            <div class="alert alert-success">
+                <strong>Успех!</strong>
+            </div>
+         {% endif %}
         <button type="Submit" class="btn btn-info">Отправить</button>
-    <br /><br />
+    <br /><br /><br />
      </form>
+     <h2>Электричество</h2>
     <form class="form-horizontal" method="post" action="/account/addElectricityMeters/">
      {% csrf_token %}
      {% for field in addElectForm %}
@@ -54,11 +67,16 @@
             {{ field }}
         </div>
      {% endfor %}
-         {% for error in addElectForm.errors %}
+     {% for error in addElectForm.errors %}
         <div class="alert alert-danger">
             <strong>{{ error }}</strong>
         </div>
-        {% endfor %}
+    {% endfor %}
+    {% if elecOK == True %}
+        <div class="alert alert-success">
+            <strong>Успех!</strong>
+        </div>
+    {% endif %}
         <button type="Submit" class="btn btn-info">Отправить</button>
     </form>
  </div>

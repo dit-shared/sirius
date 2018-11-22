@@ -94,8 +94,8 @@
                                     <div class="m-r-20 align-self-center">
                                         <h1 class="text-white"><i class="ti-pie-chart"></i></h1></div>
                                     <div>
-                                        <h3 class="card-title"><font = "black">Среднее показание холодной воды в месяц</font></h3>
-                                        <h6 class="card-subtitle"><font = "black">2018</font></h6> </div>
+                                        <h3 class="card-title"><font color = "black">Среднее показание холодной воды в месяц</font></h3>
+                                        <h6 class="card-subtitle"><font color = "black">2018</font></h6> </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-6 align-self-center">
@@ -108,7 +108,10 @@
                             </div>
                         </div>
                     </div>
-                    <button type="Submit" class="btn btn-info"><font size = "5">Предсказать данные</font></button>
+                    <a href="/account/getPredictionsElectricity" type="button" id="button" class="btn btn-primary btn-lg btn-block login-button">
+                        Предсказать данные
+                    </a>
+                    <br />
                 </div>
                 <!-- Row -->
                 {% block rightSideBar %} {% include 'Account/rightSideBar.html' %} {% endblock %}
@@ -130,6 +133,16 @@
         <!-- End Page wrapper  -->
         <!-- ============================================================== -->
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.26.11/dist/sweetalert2.all.min.js"></script>
+    {% if predictions %}
+    <script>
+		swal (
+		  'Посчитано',
+		  'Ваш прогноз: холодная-{{predictions.cold}} горячая-{{predictions.hot}}',
+		  'info',
+		);
+	</script>
+    {% endif %}
     {% block scripts %} {% include 'Account/scripts.html' %} {% endblock %}
 </body>
 </html>

@@ -102,7 +102,10 @@
                             </div>
                         </div>
                     </div>
-                    <button type="Submit" class="btn btn-info"><font size = "5">Предсказать данные</font></button>
+                    <a href="/account/getPredictionsElectricity" type="button" id="button" class="btn btn-primary btn-lg btn-block login-button">
+                        Предсказать данные
+                    </a>
+                    <br />
                 </div>
                 <!-- Row -->
                 {% block rightSideBar %} {% include 'Account/rightSideBar.html' %} {% endblock %}
@@ -128,6 +131,16 @@
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.26.11/dist/sweetalert2.all.min.js"></script>
+    {% if predictions %}
+    <script>
+		swal (
+		  'Посчитано',
+		  'Ваш прогноз: ночь-{{predictions.night}} день-{{predictions.top}}',
+		  'info',
+		);
+	</script>
+    {% endif %}
 {% block scripts %} {% include 'Account/scripts.html' %} {% endblock %}
 </body>
 </html>
