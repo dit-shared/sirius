@@ -6,42 +6,54 @@ $(function() {
     Morris.Area({
         element: 'earning',
         data: [{
-                month: '2018-03-02',
-                Cold: 300,
-                Hot: 718,
+                month: '2017-12',
+                Cold: 6.1,
+                Hot: 4.4,
             },{
-                month: '2018-04-12',
-                Cold: 310,
-                Hot: 727,
+                month: '2018-01',
+                Cold: 7.8,
+                Hot: 5.1,
             },{
-                month: '2018-05-17',
-                Cold: 320,
-                Hot: 730,
+                month: '2018-02',
+                Cold: 7.3,
+                Hot: 4.8,
             },{
-                month: '2018-06-01',
-                Cold: 330,
-                Hot: 735,
+                month: '2018-03',
+                Cold: 5.4,
+                Hot: 5.0,
             },{
-                month: '2018-07-30',
-                Cold: 340,
-                Hot: 740,
+                month: '2018-04',
+                Cold: 7.1,
+                Hot: 4.6,
             },{
-                month: '2018-08-06',
-                Cold: 347,
-                Hot: 746,
+                month: '2018-05',
+                Cold: 6.3,
+                Hot: 5.2,
             },{
-                month: '2018-09-11',
-                Cold: 354,
-                Hot: 751,
+                month: '2018-06',
+                Cold: 9.0,
+                Hot: 6.5,
             },{
-                month: '2018-10-02',
-                Cold: 360,
-                Hot: 758,
+                month: '2018-07',
+                Cold: 9.2,
+                Hot: 4.2,
+            },{
+                month: '2018-08',
+                Cold: 6.4,
+                Hot: 4.8,
+            },{
+                month: '2018-09',
+                Cold: 6.1,
+                Hot: 5.1,
+            },{
+                month: '2018-10',
+                Cold: 6.9,
+                Hot: 6.2,
             },
         ],
         xkey: 'month',
-        ykeys: ['Cold', 'Hot'],
-        labels: ['Cold', 'Hot'],
+        ykeys: ['Hot', 'Cold'],
+        labels: ['Горячая', 'Холодная'],
         pointSize: 3,
         fillOpacity: 0,
         pointStrokeColors: ['#1976d2', '#26c6da', '#1976d2'],
@@ -53,20 +65,6 @@ $(function() {
         resize: true,
         xLabelAngle: 45,
         xLabels: 'month',
-//        xLabelFormat: function (d) {
-//            var weekdays = new Array(7);
-//            weekdays[0] = "SUN";
-//            weekdays[1] = "MON";
-//            weekdays[2] = "TUE";
-//            weekdays[3] = "WED";
-//            weekdays[4] = "THU";
-//            weekdays[5] = "FRI";
-//            weekdays[6] = "SAT";
-//
-//            return weekdays[d.getDay()] + '-' +
-//                   ("0" + (d.getMonth() + 1)).slice(-2) + '-' +
-//                   ("0" + (d.getDate())).slice(-2);
-//        },
     });
 
     // ============================================================== 
