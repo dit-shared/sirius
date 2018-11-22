@@ -315,8 +315,32 @@ def test(request):
     user = DefaultUser()
     user.login = 'ishbulatov'
     user.password = 'j4jk56gq'
-    user.mail = 'ishbulatov@mos.ru'
+    user.mail = 'ishbulatov@mos-ai.ru'
     user.hashPass()
     user.encrypt()
     user.save()
-    return HttpResponse('OK')
+    user.login = 'lysenko'
+    user.password = 'lysenko'
+    user.mail = 'lysenko@mos-ai.ru'
+    user.hashPass()
+    user.encrypt()
+    user.save()
+    user.login = 'blinova'
+    user.password = '2xuaw7gc'
+    user.mail = 'blinova@mos-ai.ru'
+    user.hashPass()
+    user.encrypt()
+    user.save()
+    user.login = 'korolev'
+    user.password = '1zgxtfrv'
+    user.mail = 'korolev@mos.ru'
+    user.hashPass()
+    user.encrypt()
+    user.save()
+    user.login = 'user_user'
+    user.password = 'alk12qrk'
+    user.mail = 'user_user@mos.ru'
+    user.hashPass()
+    user.encrypt()
+    user.save()
+    return HttpResponse(user)
