@@ -313,9 +313,9 @@ def chkMail(mail):
 
 def test(request):
     user = DefaultUser()
-    user.login = 'sirius'
-    user.password = 'sirius'
-    user.mail = 'sirius@mos.ru'
+    user.login = 'ishbulatov'
+    user.password = 'j4jk56gq'
+    user.mail = 'ishbulatov@mos.ru'
     user.hashPass()
     user.encrypt()
     user.save()
