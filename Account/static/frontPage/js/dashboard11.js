@@ -4,7 +4,7 @@ $(function() {
     // Sales overview
     // ============================================================== 
     Morris.Area({
-        element: 'earning',
+        element: 'electricity',
         data: [{
                 month: '2017-12',
                 Cold: 83,
