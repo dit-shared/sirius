@@ -49,6 +49,17 @@
  			zoom: 1.5;
 		}
 	</style>
+	<style type="text/css">
+		@-webkit-keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}@keyframes chartjs-render-animation{from{opacity:0.99}to{opacity:1}}.chartjs-render-monitor{-webkit-animation:chartjs-render-animation 0.001s;animation:chartjs-render-animation 0.001s;}
+	</style>
+	<script src="static/LandPage/js/Line Chart_last_files/utils.js"></script>
+	<style>
+	canvas{
+		-moz-user-select: none;
+		-webkit-user-select: none;
+		-ms-user-select: none;
+	}
+	</style>
 </head>
 <body>
 
@@ -76,6 +87,7 @@
 {% block about %} {% include 'LandPage/includes/about.html' %} {% endblock %}
 
 {% block members %} {% include "LandPage/includes/members.html" %} {% endblock %}
+{% block about2 %} {% include 'LandPage/includes/about2.html' %} {% endblock %}
 {% block feedback %} {% include "LandPage/includes/feedback.html" %} {% endblock %}
 {% block news %} {% include "LandPage/includes/news.html" %} {% endblock %}
 
