@@ -38,7 +38,8 @@ class ExtUser(models.Model):
 class WaterMeters(models.Model):
     user_id = models.IntegerField()
     date = models.DateField()
-    value = models.IntegerField()
+    valueHot = models.IntegerField(default=0)
+    valueCold = models.IntegerField(default=0)
 
     def __str__(self):
         return str(self.date)
@@ -46,8 +47,8 @@ class WaterMeters(models.Model):
 class ElectricityMeters(models.Model):
     user_id = models.IntegerField()
     date = models.DateField()
-    value = models.IntegerField()
-    zone = models.IntegerField()
+    valueNight = models.IntegerField(default=0)
+    valueDay = models.IntegerField(default=0)
 
     def __str__(self):
         return str(self.date)

@@ -129,47 +129,23 @@
                                         <thead>
                                             <tr>
                                                 <th>       </th>
-                                                <th>12.2017</th>
-                                                <th>01.2018</th>
-                                                <th>02.2018</th>
-                                                <th>03.2018</th>
-                                                <th>04.2018</th>
-                                                <th>05.2018</th>
-                                                <th>06.2018</th>
-                                                <th>07.2018</th>
-                                                <th>08.2018</th>
-                                                <th>09.2018</th>
-                                                <th>10.2018</th>
+                                                {% for meter in meters %}
+                                                    <td>{{ meter.date }}</td>
+                                                {% endfor %}
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
                                                 <th>Пик</th>
-                                                <td>83</td>
-                                                <td>98</td>
-                                                <td>145</td>
-                                                <td>95</td>
-                                                <td>51</td>
-                                                <td>58</td>
-                                                <td>112</td>
-                                                <td>54</td>
-                                                <td>79</td>
-                                                <td>56</td>
-                                                <td>55</td>
+                                                {% for meter in meters %}
+                                                    <td>{{ meter.valueDay }}</td>
+                                                {% endfor %}
                                             </tr>
                                             <tr>
                                                 <th>Ночь</th>
-                                                <td>31</td>
-                                                <td>29</td>
-                                                <td>47</td>
-                                                <td>28</td>
-                                                <td>24</td>
-                                                <td>20</td>
-                                                <td>44</td>
-                                                <td>21</td>
-                                                <td>33</td>
-                                                <td>32</td>
-                                                <td>21</td>
+                                                {% for meter in meters %}
+                                                    <td>{{ meter.valueNight }}</td>
+                                                {% endfor %}
                                             </tr>
                                         </tbody>
                                     </table>
@@ -184,7 +160,37 @@
             </div>
         </div>
     </div>
-
     {% block scripts %} {% include 'Account/scripts.html' %} {% endblock %}
+    <script>
+       $(function() {
+           Morris.Area({
+                element: 'electricity',
+
+                data: [
+                    {% for meter in meters %}
+                         {
+                            month: '{{ meter.date }}',
+                            Cold: {{meter.valueDay}},
+                            Hot: {{meter.valueNight}},
+                         },
+                    {% endfor %}
+                ],
+                xkey: 'month',
+                ykeys: ['Hot', 'Cold'],
+                labels: ['Ночь', 'Пик'],
+                pointSize: 3,
+                fillOpacity: 0,
+                pointStrokeColors: ['#1976d2', '#26c6da', '#1976d2'],
+                behaveLikeLine: true,
+                gridLineColor: '#e0e0e0',
+                lineWidth: 3,
+                hideHover: 'auto',
+                lineColors: ['#000000', '#ff6600',],
+                resize: true,
+                xLabelAngle: 45,
+                xLabels: 'month',
+            });
+        });
+    </script>
 </body>
 </html>

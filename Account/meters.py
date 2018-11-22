@@ -17,12 +17,15 @@ def addElectricityVal(request):
             meters = addElecValForm.save(commit=False)
             meters.user_id = id
             meters.date = datetime.date(year=int(request.POST['year']), month=int(request.POST['month']), day=1)
+            print(meters.date)
 
-            if ElectricityMeters.objects.filter(user_id=id).filter(date=meters.date).filter(zone=meters.zone).exists():
-                ElectricityMeters.objects.filter(user_id=id).filter(date=meters.date).filter(zone=meters.zone).update(value=meters.value)
+            if ElectricityMeters.objects.filter(user_id=id).filter(date=meters.date).exists():
+                ElectricityMeters.objects.filter(user_id=id).filter(date=meters.date).update(valueDay=meters.valueDay)
+                ElectricityMeters.objects.filter(user_id=id).filter(date=meters.date).update(valueNight=meters.valueNight)
             else:
                 meters.save()
-            elecOK = True
+
+        elecOK = True
         feedbackForm = forms.SendFeedback()
         addWaterForm = forms.AddWaterMeter()
 
@@ -55,7 +58,8 @@ def addWaterVal(request):
             meters.date = datetime.date(year=int(request.POST['year']), month=int(request.POST['month']), day=1)
 
             if WaterMeters.objects.filter(user_id=id).filter(date=meters.date).exists():
-                WaterMeters.objects.filter(user_id=id).filter(date=meters.date).update(value=meters.value)
+                WaterMeters.objects.filter(user_id=id).filter(date=meters.date).update(valueHot=meters.valueHot)
+                WaterMeters.objects.filter(user_id=id).filter(date=meters.date).update(valueCold=meters.valueCold)
             else:
                 meters.save()
 

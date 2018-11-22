@@ -7,6 +7,7 @@ from . import forms
 from .models import DefaultUser, News, StandartDecryptField, StandartEncryptField, HashPassword, Subscriber
 from Gku.crypto import AESCipher
 import datetime, urllib.parse, os, re
+from Gku import yandexAPI
 
 def index(request):
     if 'id' not in request.session:
@@ -312,12 +313,6 @@ def chkMail(mail):
 
 
 def test(request):
-    user = DefaultUser()
-    user.login = 'sirius'
-    user.password = 'sirius'
-    user.mail = 'keklol@gmail.com'
-    user.hashPass()
-    user.genActivationKey(2)
-    user.encrypt()
-    user.save()
-    return HttpResponse('OK')
+    v = request.GET['v']
+    resp = yandexAPI.getCoord(v)
+    return HttpResponse(resp)

@@ -129,47 +129,23 @@
                                         <thead>
                                             <tr>
                                                 <th>       </th>
-                                                <th>12.2017</th>
-                                                <th>01.2018</th>
-                                                <th>02.2018</th>
-                                                <th>03.2018</th>
-                                                <th>04.2018</th>
-                                                <th>05.2018</th>
-                                                <th>06.2018</th>
-                                                <th>07.2018</th>
-                                                <th>08.2018</th>
-                                                <th>09.2018</th>
-                                                <th>10.2018</th>
+                                                {% for meter in meters %}
+                                                    <td>{{ meter.date }}</td>
+                                                {% endfor %}
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
                                                 <th>Холодная вода</th>
-                                                <td>6.1</td>
-                                                <td>7.8</td>
-                                                <td>7.3</td>
-                                                <td>5.4</td>
-                                                <td>7.1</td>
-                                                <td>6.3</td>
-                                                <td>9.0</td>
-                                                <td>9.2</td>
-                                                <td>6.4</td>
-                                                <td>6.1</td>
-                                                <td>6.9</td>
+                                                {% for meter in meters %}
+                                                    <td>{{ meter.valueCold }}</td>
+                                                {% endfor %}
                                             </tr>
                                             <tr>
                                                 <th>Горячая вода</th>
-                                                <td>4.4</td>
-                                                <td>5.1</td>
-                                                <td>4.8</td>
-                                                <td>5.0</td>
-                                                <td>4.6</td>
-                                                <td>5.2</td>
-                                                <td>6.5</td>
-                                                <td>4.2</td>
-                                                <td>4.8</td>
-                                                <td>5.1</td>
-                                                <td>6.2</td>
+                                                {% for meter in meters %}
+                                                    <td>{{ meter.valueHot }}</td>
+                                                {% endfor %}
                                             </tr>
                                         </tbody>
                                     </table>
@@ -223,6 +199,39 @@
     </div>
     <script src="{% static 'frontPage/js/dashboard1.js' %}"></script>
     {% block scripts %} {% include 'Account/scripts.html' %} {% endblock %}
+<script>
+$(function() {
+    // ==============================================================
+    // Sales overview
+    // ==============================================================
+    Morris.Area({
+        element: 'earning',
+        data: [
+            {% for meter in meters %}
+            {
+                month: {{ meter.date }},
+                Cold: {{ meter.valueCold }},
+                Hot: {{ meter.valueHot }},
+            },
+            {% endfor %}
+        ],
+        xkey: 'month',
+        ykeys: ['Hot', 'Cold'],
+        labels: ['Горячая', 'Холодная'],
+        pointSize: 3,
+        fillOpacity: 0,
+        pointStrokeColors: ['#1976d2', '#26c6da', '#1976d2'],
+        behaveLikeLine: true,
+        gridLineColor: '#e0e0e0',
+        lineWidth: 3,
+        hideHover: 'auto',
+        lineColors: ['#FF8080', '#007bff',],
+        resize: true,
+        xLabelAngle: 45,
+        xLabels: 'month',
+    });
+    });
+</script>
 </body>
 
 </html>

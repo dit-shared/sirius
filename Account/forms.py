@@ -14,32 +14,35 @@ yearsChoices = ((2016, 2016), (2017, 2017), (2018, 2018))
 class AddElecticityMeter(forms.ModelForm):
     month = forms.ChoiceField(widget=forms.Select, choices=dateChoices)
     year = forms.ChoiceField(widget=forms.Select, choices=yearsChoices)
-    zone = forms.ChoiceField(widget=forms.Select, choices=zoneChoices, label='Выберите тариф')
-    value = forms.CharField()
+    valueNight = forms.CharField()
+    valueDay = forms.CharField()
+
     class Meta:
         model = ElectricityMeters
-        fields = ('year', 'month', 'zone', 'value')
+        fields = ('year', 'month', 'valueNight', 'valueDay')
 
     def __init__(self, *args, **kwargs):
         super(AddElecticityMeter, self).__init__(*args, **kwargs)
         self.fields['month'].widget.attrs.update({'class': 'form-control', })
         self.fields['year'].widget.attrs.update({'class': 'form-control', })
-        self.fields['zone'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Тариф', })
-        self.fields['value'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Введите показания счетчиков', })
+        self.fields['valueNight'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Ночной тариф', })
+        self.fields['valueDay'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Дневной тариф', })
 
 class AddWaterMeter(forms.ModelForm):
     month = forms.ChoiceField(widget=forms.Select, choices=dateChoices)
     year = forms.ChoiceField(widget=forms.Select, choices=yearsChoices)
-    value = forms.CharField(label='Kek')
+    valueCold = forms.CharField(label='Холодная вода')
+    valueHot = forms.CharField(label='Горячая водв')
     class Meta:
         model = WaterMeters
-        fields = ('year', 'month', 'value')
+        fields = ('year', 'month', 'valueHot', 'valueCold')
 
     def __init__(self, *args, **kwargs):
         super(AddWaterMeter, self).__init__(*args, **kwargs)
         self.fields['month'].widget.attrs.update({'class': 'form-control', })
         self.fields['year'].widget.attrs.update({'class': 'form-control', })
-        self.fields['value'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Введите показания счетчиков', })
+        self.fields['valueHot'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Горячая вода', })
+        self.fields['valueCold'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Холодная вода', })
 
 
 class ChangePassword(forms.ModelForm):

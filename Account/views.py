@@ -1,10 +1,11 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from LandPage.models import DefaultUser
-from .models import ExtUser, FeedbackRecord
+from .models import ExtUser, FeedbackRecord, WaterMeters, ElectricityMeters
 import Account.forms as forms
 from Gku.TelegramBotClass import send as SendTelegram
 from Gku import settings as GkuSettings
+from Gku import yandexAPI
 
 def index(request):
     if 'id' not in request.session:
@@ -21,8 +22,14 @@ def index(request):
     if ExtUser.objects.filter(user_id=id).exists():
         extUser = ExtUser.objects.get(user_id=id)
 
+    coords = {'l': 0, 'p': 0}
+    if extUser.adress != '':
+        resp = yandexAPI.getCoord(extUser.adress).split(' ')
+        coords['l'] = resp[0]
+        coords['p'] = resp[1]
+
     feedbackForm = forms.SendFeedback()
-    return render(request, 'FrontPage/index.html', {'user': user, 'extUser': extUser, 'feedbackForm': feedbackForm})
+    return render(request, 'FrontPage/index.html', {'user': user, 'extUser': extUser, 'feedbackForm': feedbackForm, 'coords': coords})
 
 def electricity(request):
     if 'id' not in request.session:
@@ -40,7 +47,12 @@ def electricity(request):
         extUser = ExtUser.objects.get(user_id=id)
 
     feedbackForm = forms.SendFeedback()
-    return render(request, 'Electricity/index.html', {'user': user, 'extUser': extUser, 'feedbackForm': feedbackForm})
+    meters = ElectricityMeters.objects.filter(user_id=id)
+
+    for meter in meters:
+        meter.date = '{:%Y-%m}'.format(meter.date)
+
+    return render(request, 'Electricity/index.html', {'user': user, 'extUser': extUser, 'feedbackForm': feedbackForm, 'meters': meters})
 
 def water(request):
     if 'id' not in request.session:
@@ -58,7 +70,12 @@ def water(request):
         extUser = ExtUser.objects.get(user_id=id)
 
     feedbackForm = forms.SendFeedback()
-    return render(request, 'Water/index.html', {'user': user, 'extUser': extUser, 'feedbackForm': feedbackForm})
+    meters = WaterMeters.objects.filter(user_id=id)
+
+    for meter in meters:
+        meter.date = '{:%Y-%m}'.format(meter.date)
+
+    return render(request, 'Water/index.html', {'user': user, 'extUser': extUser, 'feedbackForm': feedbackForm, 'meters': meters})
 
 def changeMode(request):
     if 'id' not in request.session:
