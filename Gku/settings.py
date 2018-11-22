@@ -13,8 +13,9 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 import os
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-HOSTNAME = '212.47.227.134:8000'
+DEBUG = True
+HOSTNAME = '127.0.0.1'
+#HOSTNAME = '212.47.227.134:8000'
 SERVER_IP = '212.47.227.134'
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)

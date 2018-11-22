@@ -114,6 +114,28 @@ def predictWater(request):
     feedbackForm = forms.SendFeedback()
     return render(request, 'PredictWater/index.html', {'user': user, 'extUser': extUser, 'feedbackForm': feedbackForm})
 
+
+def uploadData(request):
+    if 'id' not in request.session:
+        return HttpResponseRedirect('/')
+    id = request.session['id']
+
+    if not DefaultUser.objects.filter(id=id).exists():
+        return HttpResponseRedirect('/logout')
+
+    user = DefaultUser.objects.get(id=id)
+    user.decrypt()
+
+    extUser = ExtUser()
+    if ExtUser.objects.filter(user_id=id).exists():
+        extUser = ExtUser.objects.get(user_id=id)
+
+    feedbackForm = forms.SendFeedback()
+    addWaterForm = forms.AddWaterMeter()
+    addElectForm = forms.AddElecticityMeter()
+    return render(request, 'UploadData/index.html', {'user': user, 'extUser': extUser, 'feedbackForm': feedbackForm,
+                                                     'addWaterForm': addWaterForm, 'addElectForm': addElectForm})
+
 def settings(request):
     if 'id' not in request.session:
         return HttpResponseRedirect('/')
@@ -157,3 +179,12 @@ def feedback(request):
             SendTelegram(token=GkuSettings.FEEDBACK_TELEGRAM_BOT_KEY, chat_id=GkuSettings.FEEDBACK_TELEGRAM_CHAT_ID, text=telegram_msg)
             return render(request, 'OK/index.html', {'title': 'Спасибо!', 'msg': 'Ваш запрос отправлен на рассмотрение!', 'link': 'account'})
     return HttpResponseRedirect('/account')
+
+def addMohthMeter(requset):
+    if 'id' not in requset.session:
+        return HttpResponseRedirect('/logout')
+    if requset.method == 'POST':
+        if 'month' not in requset.POST or 'meters' not in requset.POST:
+            return HttpResponseRedirect('/account')
+        month = requset.POST['month']
+        meters = requset.POST['meters']

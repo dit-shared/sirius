@@ -25,7 +25,7 @@ def changeExtUserInfo(request):
                 if extUser.cnt_fiodr < 1:
                     errors.append('Некорректное количество проживающих')
 
-            print(extUser.cnt_fiodr, extUser.total_square)
+            print(extUser.ava.name)
 
             if len(errors) == 0:
                 if ExtUser.objects.filter(user_id=extUser.user_id).exists():
@@ -34,7 +34,7 @@ def changeExtUserInfo(request):
                         extUser.phone = tmpExtUser.phone
                     if extUser.adress == "":
                         extUser.adress = tmpExtUser.phone
-                    if not extUser.ava:
+                    if extUser.ava.name != '':
                         extUser.ava = tmpExtUser.ava
                     if extUser.cnt_fiodr != None:
                             extUser.cnt_fiodr = tmpExtUser.cnt_fiodr

@@ -32,13 +32,6 @@
     .card-body-cold{
     }
 </style>
-
-<style>
-.marginleft{
-    margin-left: 150px;
-}
-</style>
-
 </head>
 
 <body class="fix-header fix-sidebar card-no-border">
@@ -68,7 +61,7 @@
                             <!-- Dark Logo icon -->
                             <!-- <img src="../assets/images/logo-icon.png" alt="homepage" class="dark-logo" />
                             Light Logo icon -->
-                            <img src="../assets/images/logo-text.png" alt="homepage" class="light-logo" />
+                            <img src="../assets/images/logo-light-icon.png" alt="homepage" class="light-logo" />
                         </b>
                         <!--End Logo icon -->
                         <!-- Logo text --><span>
@@ -211,67 +204,56 @@
             <!-- ============================================================== -->
             <!-- Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->
+           <!--  <div class="btn-group" data-toggle="buttons">
+            
+                <label class="btn btn-primary active">
+                    <input type="radio" name="options" id="option1" autocomplete="off" checked> Режим напоминания
+                </label>
+            
+                
+                <label class="btn btn-primary">
+                    <input type="radio" name="options" id="option2" autocomplete="off"> Режим автозаполнения
+                </label>
+            </div> -->
+<br>
+ <div class="col-lg-3 col-xlg-2 m-b-30">
+        <div class="form-group">
+            <label for="sel1">Выберите месяц:</label>
+            <select class="form-control" id="sel1">
+                <option>Январь</option>
+                <option>Февраль</option>
+                <option>Март</option>
+                <option>Апрель</option>
+                <option>Май</option>
+                <option>Июнь</option>
+                <option>Июль</option>
+                <option>Август</option>
+                <option>Сентябрь</option>
+                <option>Октябрь</option>
+                <option>Ноябрь</option>
+                <option>Декабрь</option>
+                </select>
+        </div>
+        <div><input type="text" class="form-control" id="exampleInputname1" placeholder="Введите показания счётчиков"> </div>
+        <br>
+        <button type="Submit" class="btn btn-info">ОК</button>
+    </div> 
 
-            <div class="row page-titles">
-                <div class="col-md-5 align-self-center">
-                    <h3 class="text-themecolor">Настройки</h3>
-                </div>
-                <div class="col-md-7 align-self-center">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="javascript:void(0)">Личный кабинет</a></li>
-                        <li class="breadcrumb-item active">Настройки</li>
-                    </ol>
-                </div>
-                <div>
-                    <button class="right-side-toggle waves-effect waves-light btn-inverse btn btn-circle btn-sm pull-right m-l-10"><i class="ti-settings text-white"></i></button>
-                </div>
-            </div>
-
-            <div class="row marginleft">
-            <div class="col-lg-3 col-xlg-2 m-b-30">
-                <form>
-                    <h1>Сменить пароль</h1>
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="exampleInputname1" placeholder="Старый пароль"></div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="exampleInputname1" placeholder="Новый пароль"></div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="exampleInputname1" placeholder="Подтвердите пароль"></div>
-                    <button type="Submit" class="btn btn-info">Сменить пароль</button>
-                </form>
-                <br>
-                <form>
-                <h1>Изменить Email</h1>
-                    <div class="form-group">
-                        <input type="email" class="form-control" placeholder="Введите Email"> </div>
-                    <div class="form-group">
-                        <input type="email" class="form-control" placeholder="Подтвердите Email"> </div>
-                    <button type="Submit" class="btn btn-info">Изменить Email</button>
-                </form>
-            </div>
-            <div class="col-lg-3 col-xlg-2 m-b-1000">
-                <form>
-                    <h1>Сменить пароль</h1>
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="exampleInputname1" placeholder="Старый пароль"></div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="exampleInputname1" placeholder="Новый пароль"></div>
-                    <div class="form-group">
-                        <input type="text" class="form-control" id="exampleInputname1" placeholder="Подтвердите пароль"></div>
-                    <button type="Submit" class="btn btn-info">Сменить пароль</button>
-                </form>
-            </div>
-            <div class="col-lg-3 col-xlg-2 m-b-1000">
-                <form>
-                <h1>Изменить Email</h1>
-                    <div class="form-group">
-                        <input type="email" class="form-control" placeholder="Введите Email"> </div>
-                    <div class="form-group">
-                        <input type="email" class="form-control" placeholder="Подтвердите Email"> </div>
-                    <button type="Submit" class="btn btn-info">Изменить Email</button>
-                </form>
-            </div>
-            </div>
+<form class="form-horizontal" method="post" enctype="multipart/form-data" action="file.php">
+ 
+ <div class="form-group">
+  <label for="file" class="col-sm-2 control-label">Файл</label>
+  <div class="col-sm-8">
+ <input type="file" name="file" id="file">
+  </div>
+ </div>
+ <div class="form-group">
+  <div class="col-sm-offset-2 col-sm-8">
+ <button type="submit" id="submit" class="btn btn-info">Отправить</button>
+ <div></div>
+  </div>
+ </div>
+</form>
             <!-- ============================================================== -->
             <!-- End Bread crumb and right sidebar toggle -->
             <!-- ============================================================== -->

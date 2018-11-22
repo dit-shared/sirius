@@ -13,6 +13,10 @@ urlpatterns = [
     path('changeExtendedInfo/', accountSettings.changeExtUserInfo, name='changeExtendedInfo'),
     path('changeStandartInfo/', accountSettings.changeStandartUserInfo, name='changeStandartUserInfo'),
     path('changePassword/', accountSettings.changePassword, name='changePassword'),
+    path('uploadData/', views.uploadData, name='uploadData'),
     path('feedback/', views.feedback, name='feedback'),
-    path('test/', accountSettings.test, name='test')
+    path('test/', accountSettings.test, name='test'),
+    path('addElectricityMeters/', meters.addElectricityVal, name='addElectricityVal'),
+    path('addWaterMeters/', meters.addWaterVal, name='addWaterVal'),
+
 ]

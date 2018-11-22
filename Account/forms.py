@@ -4,19 +4,43 @@ from .models import WaterMeters, ElectricityMeters, FeedbackRecord, ExtUser
 from snowpenguin.django.recaptcha2.fields import ReCaptchaField
 from snowpenguin.django.recaptcha2.widgets import ReCaptchaWidget
 
+dateChoices = (('Январь', 'Январь'),('Февраль','Февраль'),('Март','Март'),('Апрель','Апрель'),('Май','Май'), ('Июнь','Июнь'),
+               ('Июль', 'Июль'), ('Август','Август'), ('Сентябрь','Сентябрь'), ('Октябрь','Октябрь'), ('Ноябрь','Ноябрь'),
+               ('Декабрь','Декабрь'))
+
+zoneChoices = ((1, 'ночь'), (2, 'день'), (3, 'пик'), (4, 'полупик'))
+yearsChoices = ((2016, 2016), (2017, 2017), (2018, 2018))
+
 class AddElecticityMeter(forms.ModelForm):
-    date = forms.DateField(widget=forms.DateInput(), label='Дата')
-    zone = forms.IntegerField(widget=forms.ChoiceField(), label='Выберите тариф')
+    month = forms.ChoiceField(widget=forms.Select, choices=dateChoices)
+    year = forms.ChoiceField(widget=forms.Select, choices=yearsChoices)
+    zone = forms.ChoiceField(widget=forms.Select, choices=zoneChoices, label='Выберите тариф')
+    value = forms.CharField()
     class Meta:
         model = ElectricityMeters
-        fields = {'date', 'value', 'zone'}
+        fields = ('year', 'month', 'zone', 'value')
+
+    def __init__(self, *args, **kwargs):
+        super(AddElecticityMeter, self).__init__(*args, **kwargs)
+        self.fields['month'].widget.attrs.update({'class': 'form-control', })
+        self.fields['year'].widget.attrs.update({'class': 'form-control', })
+        self.fields['zone'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Тариф', })
+        self.fields['value'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Введите показания счетчиков', })
 
 class AddWaterMeter(forms.ModelForm):
-    date = forms.DateInput()
-    value = forms.CharField
+    month = forms.ChoiceField(widget=forms.Select, choices=dateChoices)
+    year = forms.ChoiceField(widget=forms.Select, choices=yearsChoices)
+    value = forms.CharField(label='Kek')
     class Meta:
         model = WaterMeters
-        fields = {'date', 'value'}
+        fields = ('year', 'month', 'value')
+
+    def __init__(self, *args, **kwargs):
+        super(AddWaterMeter, self).__init__(*args, **kwargs)
+        self.fields['month'].widget.attrs.update({'class': 'form-control', })
+        self.fields['year'].widget.attrs.update({'class': 'form-control', })
+        self.fields['value'].widget.attrs.update({'class': 'form-control', 'placeholder': 'Введите показания счетчиков', })
+
 
 class ChangePassword(forms.ModelForm):
     oldpass = forms.CharField(widget=forms.PasswordInput(), label='Старый пароль')
@@ -24,7 +48,7 @@ class ChangePassword(forms.ModelForm):
     repass = forms.CharField(widget=forms.PasswordInput(), label='Повторите пароль')
     class Meta:
         model = DefaultUser
-        fields = {'oldpass', 'newpass', 'repass'}
+        fields = ('oldpass', 'newpass', 'repass')
 
     def __init__(self, *args, **kwargs):
         super(ChangePassword, self).__init__(*args, **kwargs)
@@ -37,7 +61,7 @@ class ChangeMail(forms.ModelForm):
     confirmMail = forms.EmailField(label='Повторите почту')
     class Meta:
         model = DefaultUser
-        fields = {'confirmMail', 'newMail'}
+        fields = ('confirmMail', 'newMail')
 
     def __init__(self, *args, **kwargs):
         super(ChangeMail, self).__init__(*args, **kwargs)
@@ -52,7 +76,7 @@ class ChangeExtUserInfo(forms.ModelForm):
     cnt_fiodr = forms.IntegerField(label='Количество проживающих людей', required=False)
     class Meta:
         model = ExtUser
-        fields = {'adress', 'phone', 'ava', 'total_square', 'cnt_fiodr'}
+        fields = ('adress', 'phone', 'ava', 'total_square', 'cnt_fiodr')
 
     def __init__(self, *args, **kwargs):
         super(ChangeExtUserInfo, self).__init__(*args, **kwargs)
@@ -67,7 +91,7 @@ class ChangeUserInfo(forms.ModelForm):
     patronymic = forms.CharField(label='Ваше отчество', required=False)
     class Meta:
         model = DefaultUser
-        fields = {'surname', 'name', 'patronymic'}
+        fields = ('surname', 'name', 'patronymic')
 
     def __init__(self, *args, **kwargs):
         super(ChangeUserInfo, self).__init__(*args, **kwargs)
@@ -81,7 +105,7 @@ class SendFeedback(forms.ModelForm):
 
     class Meta:
         model = FeedbackRecord
-        fields = {'title', 'text'}
+        fields = ('title', 'text')
 
     def __init__(self, *args, **kwargs):
         super(SendFeedback, self).__init__(*args, **kwargs)
