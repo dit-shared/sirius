@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse, HttpResponseRedirect
 from LandPage.models import DefaultUser
-from .models import ExtUser, WaterMeters, ElectricityMeters
+from .models import ExtUser, WaterMeters, ElectricityMeters, WaterPredictions, ElectricityPredictions
 from Account import forms
 import datetime, random
 
@@ -100,8 +100,9 @@ def getPredictionsWater(request):
 
     feedbackForm = forms.SendFeedback()
 
-    coldWater = random.randint(30, 100) / 10
-    hotWater = random.randint(30, 100) / 10
+    predict = WaterPredictions.objects.filter(user_id=id)
+    coldWater = predict.cold
+    hotWater = predict.hot
     return render(request, 'PredictWater/index.html', {'user': user, 'extUser': extUser, 'feedbackForm': feedbackForm, 'predictions': {'cold': coldWater, 'hot': hotWater}})
 
 
@@ -122,6 +123,7 @@ def getPredictionsElectricity(request):
 
     feedbackForm = forms.SendFeedback()
 
-    night = random.randint(300, 1200) / 10
-    top = random.randint(300, 1200) / 10
+    predict = ElectricityPredictions.objects.filter(user_id=id)
+    night = predict.night
+    top = predict.day
     return render(request, 'PredictElectricity/index.html', {'user': user, 'extUser': extUser, 'feedbackForm': feedbackForm, 'predictions': {'night': night, 'top': top}})

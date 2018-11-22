@@ -31,12 +31,12 @@ SECRET_KEY = '##q!fj^cn(0^&&w#f-p-xm$tieppkkp4=g^rqs@77l_ts^5ywk'
 ALLOWED_HOSTS = ['*']
 
 # EMAIL settings
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'cypherdesk.isyn@gmail.com'
+EMAIL_HOST = 'smtp.yandex.com'
+EMAIL_HOST_USER = 'mail@mos-ai.ru'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST_PASSWORD = 'HackersChoose1syn'
+EMAIL_HOST_PASSWORD = 'R0ad210heworldelite'
 
 RECAPTCHA_PRIVATE_KEY = '6LegpHoUAAAAAKZkDl-QmJQ9wAVAeVvKtdPGCgDz'
 RECAPTCHA_PUBLIC_KEY = '6LegpHoUAAAAACQoehcT3E57XpBbBi3XnFnqAIUl'

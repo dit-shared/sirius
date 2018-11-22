@@ -80,7 +80,7 @@ def register(request):
                     send_mail(
                         'Активация аккаунта',
                         'http://' + settings.HOSTNAME + '/activateAccount?id=' + encID + '&key=' + key,
-                        'cypherdesk.isyn@gmail.com',
+                        'mail@mos-ai.ru',
                         [mail,],
                     )
 

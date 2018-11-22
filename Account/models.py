@@ -60,3 +60,13 @@ class FeedbackRecord(models.Model):
 
     def __str__(self):
         return str(self.title)
+
+class WaterPredictions(models.Model):
+    user_id = models.IntegerField()
+    cold = models.IntegerField()
+    water = models.IntegerField()
+
+class ElectricityPredictions(models.Model):
+    user_id = models.IntegerField()
+    night = models.IntegerField()
+    day = models.IntegerField()
