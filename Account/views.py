@@ -151,7 +151,9 @@ def feedback(request):
             feedback.save()
 
             user = DefaultUser.objects.get(id=id)
-            telegram_msg = 'Sender: ' + user.name + ' ' + user.surname + ' ' + user.patronymic + '\n' + 'Title: ' + feedback.title + '\n' + 'Message: ' + feedback.text + '\n' + 'Mail' + user.mail
+            user.decrypt()
+            telegram_msg = 'Sender: ' + user.name + ' ' + user.surname + ' ' + user.patronymic + '\n' + 'Title: ' + feedback.title + '\n' + 'Message: ' + feedback.text + '\n' + 'Mail: ' + user.mail
 
             SendTelegram(token=GkuSettings.FEEDBACK_TELEGRAM_BOT_KEY, chat_id=GkuSettings.FEEDBACK_TELEGRAM_CHAT_ID, text=telegram_msg)
+            return render(request, 'OK/index.html', {'title': 'Спасибо!', 'msg': 'Ваш запрос отправлен на рассмотрение!', 'link': 'account'})
     return HttpResponseRedirect('/account')

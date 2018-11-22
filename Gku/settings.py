@@ -105,7 +105,7 @@ DATABASES = {
 }
 
 FEEDBACK_TELEGRAM_BOT_KEY = '560497318:AAFApTmjXY-3OgCPutovBW230x82d5ep08Y'
-FEEDBACK_TELEGRAM_CHAT_ID = 336661902
+FEEDBACK_TELEGRAM_CHAT_ID = -1001477386122
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
