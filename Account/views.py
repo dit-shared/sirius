@@ -128,8 +128,13 @@ def predictElectricity(request):
     if ExtUser.objects.filter(user_id=id).exists():
         extUser = ExtUser.objects.get(user_id=id)
 
+    meters = ElectricityMeters.objects.filter(user_id=id)
+
+    for meter in meters:
+        meter.date = '{:%Y-%m}'.format(meter.date)
+
     feedbackForm = forms.SendFeedback()
-    return render(request, 'PredictElectricity/index.html', {'user': user, 'extUser': extUser, 'feedbackForm': feedbackForm})
+    return render(request, 'PredictElectricity/index.html', {'user': user, 'extUser': extUser, 'feedbackForm': feedbackForm, 'meters': meters})
 
 def predictWater(request):
     if 'id' not in request.session:
@@ -147,7 +152,12 @@ def predictWater(request):
         extUser = ExtUser.objects.get(user_id=id)
 
     feedbackForm = forms.SendFeedback()
-    return render(request, 'PredictWater/index.html', {'user': user, 'extUser': extUser, 'feedbackForm': feedbackForm})
+    meters = WaterMeters.objects.filter(user_id=id)
+
+    for meter in meters:
+        meter.date = '{:%Y-%m}'.format(meter.date)
+
+    return render(request, 'PredictWater/index.html', {'user': user, 'extUser': extUser, 'feedbackForm': feedbackForm, 'meters': meters})
 
 
 def uploadData(request):

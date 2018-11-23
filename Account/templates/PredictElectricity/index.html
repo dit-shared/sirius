@@ -161,5 +161,38 @@
 	</script>
     {% endif %}
 {% block scripts %} {% include 'Account/scripts.html' %} {% endblock %}
+
+<script>
+       $(function() {
+           Morris.Area({
+                element: 'electricity',
+
+                data: [
+                    {% for meter in meters %}
+                         {
+                            month: '{{ meter.date }}',
+                            Cold: {{meter.valueDay}},
+                            Hot: {{meter.valueNight}},
+                         },
+                    {% endfor %}
+                ],
+                xkey: 'month',
+                ykeys: ['Hot', 'Cold'],
+                labels: ['Ночь', 'Пик'],
+                pointSize: 3,
+                fillOpacity: 0,
+                pointStrokeColors: ['#1976d2', '#26c6da', '#1976d2'],
+                behaveLikeLine: true,
+                gridLineColor: '#e0e0e0',
+                lineWidth: 3,
+                hideHover: 'auto',
+                lineColors: ['#000000', '#ff6600',],
+                resize: true,
+                xLabelAngle: 45,
+                xLabels: 'month',
+            });
+        });
+    </script>
+
 </body>
 </html>
