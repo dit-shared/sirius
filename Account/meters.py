@@ -103,7 +103,13 @@ def getPredictionsWater(request):
     predict = WaterPredictions.objects.get(user_id=id)
     coldWater = predict.cold / 10
     hotWater = predict.water / 10
-    return render(request, 'PredictWater/index.html', {'user': user, 'extUser': extUser, 'feedbackForm': feedbackForm, 'predictions': {'cold': coldWater, 'hot': hotWater}})
+
+    meters = WaterMeters.objects.filter(user_id=id)
+
+    for meter in meters:
+        meter.date = '{:%Y-%m}'.format(meter.date)
+
+    return render(request, 'PredictWater/index.html', {'user': user, 'extUser': extUser, 'feedbackForm': feedbackForm, 'predictions': {'cold': coldWater, 'hot': hotWater}, 'meters': meters})
 
 
 def getPredictionsElectricity(request):
@@ -126,4 +132,10 @@ def getPredictionsElectricity(request):
     predict = ElectricityPredictions.objects.get(user_id=id)
     night = predict.night / 10
     top = predict.day / 10
-    return render(request, 'PredictElectricity/index.html', {'user': user, 'extUser': extUser, 'feedbackForm': feedbackForm, 'predictions': {'night': night, 'top': top}})
+
+    meters = ElectricityMeters.objects.filter(user_id=id)
+
+    for meter in meters:
+        meter.date = '{:%Y-%m}'.format(meter.date)
+
+    return render(request, 'PredictElectricity/index.html', {'user': user, 'extUser': extUser, 'feedbackForm': feedbackForm, 'predictions': {'night': night, 'top': top}, 'meters': meters})
