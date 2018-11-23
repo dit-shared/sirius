@@ -101,8 +101,8 @@ def getPredictionsWater(request):
     feedbackForm = forms.SendFeedback()
 
     predict = WaterPredictions.objects.get(user_id=id)
-    coldWater = predict.cold
-    hotWater = predict.water
+    coldWater = predict.cold / 10
+    hotWater = predict.water / 10
     return render(request, 'PredictWater/index.html', {'user': user, 'extUser': extUser, 'feedbackForm': feedbackForm, 'predictions': {'cold': coldWater, 'hot': hotWater}})
 
 
@@ -124,6 +124,6 @@ def getPredictionsElectricity(request):
     feedbackForm = forms.SendFeedback()
 
     predict = ElectricityPredictions.objects.get(user_id=id)
-    night = predict.night
-    top = predict.day
+    night = predict.night / 10
+    top = predict.day / 10
     return render(request, 'PredictElectricity/index.html', {'user': user, 'extUser': extUser, 'feedbackForm': feedbackForm, 'predictions': {'night': night, 'top': top}})

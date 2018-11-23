@@ -13,9 +13,8 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 import os
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-HOSTNAME = '127.0.0.1'
-#HOSTNAME = '212.47.227.134:8000'
+DEBUG = False
+HOSTNAME = 'mos-ai.ru'
 SERVER_IP = '212.47.227.134'
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -35,6 +34,7 @@ EMAIL_HOST = 'smtp.yandex.com'
 EMAIL_HOST_USER = 'mail@mos-ai.ru'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST_PASSWORD = 'R0ad210heworldelite'
 
