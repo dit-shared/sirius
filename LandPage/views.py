@@ -11,8 +11,8 @@ from Gku import yandexAPI
 
 def index(request):
     if 'id' not in request.session:
-        news = News.objects.all().order_by('-id')[:3]
-        return render(request, 'LandPage/wrapper.html', {'news': news, 'showMsg': False})
+        news = News.objects.all().order_by('-id')[:6]
+        return render(request, 'LandPage/wrapper.html', {'news1': news[:3], 'news2': news[3:6], 'showMsg': False})
     return HttpResponseRedirect('/account')
 
 def login(request):
