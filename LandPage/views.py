@@ -15,6 +15,9 @@ def index(request):
         return render(request, 'LandPage/wrapper.html', {'news1': news[:3], 'news2': news[3:6], 'showMsg': False})
     return HttpResponseRedirect('/account')
 
+def gallery(request):
+    return render(request, 'Gallery/index.html')
+
 def login(request):
     errors = list()
     if 'id' in request.session:
