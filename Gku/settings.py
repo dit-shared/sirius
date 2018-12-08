@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 import os
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 HOSTNAME = 'mos-ai.ru'
 SERVER_IP = '212.47.227.134'
 
