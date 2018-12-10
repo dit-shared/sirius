@@ -6,6 +6,8 @@ import Account.forms as forms
 from Gku.TelegramBotClass import send as SendTelegram
 from Gku import settings as GkuSettings
 from Gku import yandexAPI
+import urllib.request, json
+
 
 def index(request):
     if 'id' not in request.session:
@@ -209,6 +211,7 @@ def feedback(request):
     if 'id' not in request.session:
         return HttpResponseRedirect('/')
     id = request.session['id']
+    geo_ip = '7b9395a73758350d433f400a27280e69'
 
     if request.method == 'POST':
         feedbackForm = forms.SendFeedback(request.POST)
@@ -220,7 +223,16 @@ def feedback(request):
             user = DefaultUser.objects.get(id=id)
             user.decrypt()
 
-            telegram_msg = 'Sender: ' + user.name + ' ' + user.surname + ' ' + user.patronymic + '\n' + 'Title: ' + feedback.title + '\n' + 'Message: ' + feedback.text + '\n' + 'Mail: ' + user.mail
+            client_ip = str(request.META['REMOTE_ADDR'])
+
+            geo_url = 'http://api.ipstack.com/' + client_ip + '?access_key=' + geo_ip
+
+            with urllib.request.urlopen(geo_url) as url:
+                geo_info = json.loads(str(url.read(), 'utf-8'))
+
+            telegram_msg = 'Sender: ' + user.name + ' ' + user.surname + ' ' + user.patronymic + '\nTitle: ' + feedback.title + \
+                           '\nMessage: ' + feedback.text + '\nMail: ' + user.mail + '\nuser IP: ' + client_ip + \
+                           '\nCity: ' + geo_url['country_name'] + ' ' + geo_url['city']
             SendTelegram(token=GkuSettings.FEEDBACK_TELEGRAM_BOT_KEY, chat_id=GkuSettings.FEEDBACK_TELEGRAM_CHAT_ID, text=telegram_msg)
 
             return render(request, 'OK/index.html', {'title': 'Спасибо!', 'msg': 'Ваш запрос отправлен на рассмотрение!', 'link': 'account'})
