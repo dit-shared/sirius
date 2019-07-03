@@ -13,9 +13,9 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 import os
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-HOSTNAME = 'mos-ai.ru'
-SERVER_IP = '212.47.227.134'
+DEBUG = False
+HOSTNAME = 'sirius.mos-ai.ru'
+SERVER_IP = ''
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -92,7 +92,7 @@ WSGI_APPLICATION = 'Gku.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'gku',
+        'NAME': 'jku',
         'USER': 'suriknik',
         'PASSWORD': '6dLm0kSS7z33',
         'HOST': 'localhost',
